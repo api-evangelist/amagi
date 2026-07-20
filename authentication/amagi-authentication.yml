@@ -1,0 +1,28 @@
+generated: '2026-07-17'
+method: derived
+source: openapi/amagi-callisto-openapi.yml, openapi/amagi-mapsor-openapi.yml
+summary:
+  types:
+  - apiKey
+  api_key_in:
+  - header
+  - query
+schemes:
+- name: access-key
+  type: apiKey
+  in: header
+  parameter: access_key
+  sources:
+  - openapi/amagi-callisto-openapi.yml
+- name: secret-key
+  type: apiKey
+  in: header
+  parameter: secret_key
+  sources:
+  - openapi/amagi-callisto-openapi.yml
+- name: TokenAuth
+  type: apiKey
+  in: query
+  parameter: token
+  sources:
+  - openapi/amagi-mapsor-openapi.yml
