@@ -1,0 +1,415 @@
+openapi: 3.0.0
+info:
+  description: 'The purpose of this application is to provide documentation of the APIs in services-amagi-tv
+
+
+    # Authentication
+
+
+    <!-- ReDoc-Inject: <security-definitions> -->'
+  title: services-amagi-tv API
+  contact:
+    email: suvrojyoti@amagi.com
+  version: null
+servers:
+- url: https://r5i37dwfp8.execute-api.us-east-1.amazonaws.com/dev/
+  description: Development Server
+- url: https://services.amagi.tv
+  description: Production Server
+paths:
+  /create-customer:
+    post:
+      security:
+      - access-key: []
+        secret-key: []
+      summary: Creates a new customer, requires admin access_key and secret_key
+      operationId: createNewCustomerEntry
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - customer_name
+              properties:
+                user:
+                  type: string
+                  description: Customer Name
+              example:
+                user: CUSTOMER-NAME
+      responses:
+        '200':
+          description: Successfully Created user
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - data
+                properties:
+                  data:
+                    type: string
+                    description: User Credentials
+                  error:
+                    type: string
+                    description: User Error
+                example:
+                  data:
+                    Pubnub:
+                      auth_key: xxxxxxxxxx
+                      publish_key: pub-x-xxxx-xxx-xxxx
+                      subscribe_key: sub-x-xxxx-xxx-xxxx
+                    access_key: xxxxxxxxxxxx
+                    secret_key: xxxxx+xxxxxxx.xxxxx-xx
+                    user_name: CUSTOMER-NAME
+                  error: null
+        '401':
+          $ref: '#/components/responses/ServiceError'
+        '409':
+          $ref: '#/components/responses/UserAlreadyExistsError'
+        '500':
+          description: Internal Server Error
+  /delete-customer:
+    post:
+      security:
+      - access-key: []
+        secret-key: []
+      summary: Deletes a customer, requires admin access_key and secret_key
+      operationId: deleteExistingCustomer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - customer_name
+              properties:
+                user:
+                  type: string
+                  description: Customer Name
+              example:
+                user: CUSTOMER-NAME
+      responses:
+        '200':
+          description: Customer is deleted
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - data
+                properties:
+                  data:
+                    type: string
+                    description: Deleted Customer
+                  error:
+                    type: string
+                    description: User Error
+                example:
+                  data: CUSTOMER-NAME is deleted
+                  error: null
+        '401':
+          $ref: '#/components/responses/ServiceError'
+        '409':
+          $ref: '#/components/responses/UserDoesnotExistError'
+        '500':
+          description: Internal Server Error
+  /set-key:
+    post:
+      security:
+      - access-key: []
+        secret-key: []
+      summary: Sets key with provided value, requires user access_key and secret_key
+      operationId: setKey
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - key
+              - data
+              properties:
+                key:
+                  type: string
+                  description: key where data needs to be written
+                data:
+                  type: string
+                  description: data that the customer wants to write
+              example:
+                key: CUSTOMER-NAME/FEED/fileconfig.txt
+                data: example configuration
+      responses:
+        '200':
+          description: Successfully wrote data in the key
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - data
+                properties:
+                  data:
+                    type: string
+                    description: key information data
+                  error:
+                    type: string
+                    description: User Error
+                example:
+                  data:
+                    Date: Wed, 28 Jul 2021 07:11:49 GMT
+                    ETag: b488c97f5580c8287393cc4385156776
+                    HTTPStatusCode: 200
+                    VersionId: kfQVb4MMh.tfItn_VyxpON2OVMdaRLKi
+                  error: null
+        '401':
+          $ref: '#/components/responses/ServiceError'
+        '500':
+          description: Internal Server Error
+  /list-keys:
+    get:
+      security:
+      - access-key: []
+        secret-key: []
+      summary: Lists all keys having common prefix-key, requires user access_key and secret_key
+      operationId: listKeys
+      parameters:
+      - name: key_prefix
+        in: query
+        schema:
+          type: string
+        required: true
+        description: Key Prefix
+      responses:
+        '200':
+          description: Display all keys having common prefix as 'key_prefix'
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - data
+                properties:
+                  data:
+                    type: string
+                    description: array of keys
+                  error:
+                    type: string
+                    description: User Error
+                example:
+                  data:
+                  - ETag: b488c97f5580c8287393cc4385156776
+                    Key: CUSTOMER-NAME/FEED1/config1.json
+                    LastModified: Sun, 25 Jul 2021 15:08:46 GMT
+                  - ETag: 81e9e47ca1dc97db927e191eddd270c9
+                    Key: CUSTOMER-NAME/FEED2/config2.json
+                    LastModified: Mon, 26 Jul 2021 09:22:55 GMT
+                  error: null
+        '401':
+          $ref: '#/components/responses/ServiceError'
+        '500':
+          description: Internal Server Error
+  /get-key:
+    get:
+      security:
+      - access-key: []
+        secret-key: []
+      summary: Gets value of a key
+      operationId: getKey
+      parameters:
+      - name: key
+        in: query
+        schema:
+          type: string
+        required: true
+        description: Key of the Object
+      responses:
+        '200':
+          description: Display the contents of the key
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - data
+                properties:
+                  data:
+                    type: string
+                    description: Content of the key
+                  error:
+                    type: string
+                    description: User Error
+                example:
+                  data: '{Contents of the Key}'
+                  error: null
+        '401':
+          $ref: '#/components/responses/ServiceError'
+        '500':
+          description: Internal Server Error
+  /head-key:
+    get:
+      security:
+      - access-key: []
+        secret-key: []
+      summary: Get metadata of the key
+      operationId: headKey
+      parameters:
+      - name: key
+        in: query
+        schema:
+          type: string
+        required: true
+        description: Key of the Object
+      responses:
+        '200':
+          description: Display metadata of the Key
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - data
+                properties:
+                  data:
+                    type: string
+                    description: Metadata of the key
+                  error:
+                    type: string
+                    description: User Error
+                example:
+                  data:
+                    AcceptRanges: bytes
+                    ContentLength: 24
+                    ContentType: binary/octet-stream
+                    ETag: 81e9e47ca1dc97db927e191eddd270c9
+                    LastModified: Mon, 26 Jul 2021 09:22:55 GMT
+                    Metadata: {}
+                    VersionId: gEvCTXiCVLUEtIfuBxiCl3xh5aY2PpJJ
+                  error: null
+        '401':
+          $ref: '#/components/responses/ServiceError'
+        '500':
+          description: Internal Server Error
+  /list-versions:
+    get:
+      security:
+      - access-key: []
+        secret-key: []
+      summary: List versions of the key
+      operationId: listVersions
+      parameters:
+      - name: key
+        in: query
+        schema:
+          type: string
+        required: true
+        description: Key of the Object
+      responses:
+        '200':
+          description: Display versions of the key
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - data
+                properties:
+                  data:
+                    type: string
+                    description: List of all versions of the key
+                  error:
+                    type: string
+                    description: User Error
+                example:
+                  data:
+                  - Key: CUSTOMER-NAME/FEED1/config1.json
+                    LastModified: Sun, 25 Jul 2021 15:08:46 GMT
+                    VersionId: vCxTQzYDb91KJgv2mOvUTb_iipYQex8r
+                  - Key: CUSTOMER-NAME/FEED2/config2.json
+                    LastModified: Wed, 21 Jul 2021 09:33:27 GMT
+                    VersionId: qPxgNRrsoz4Y_3XP5iriPBllugCelOvO
+                  error: null
+        '401':
+          $ref: '#/components/responses/ServiceError'
+        '500':
+          description: Internal Server Error
+components:
+  securitySchemes:
+    access-key:
+      type: apiKey
+      in: header
+      name: access_key
+    secret-key:
+      type: apiKey
+      in: header
+      name: secret_key
+  responses:
+    badRequestError:
+      description: Bad request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/errorMessage'
+    ServiceError:
+      description: Service error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/errorMessage'
+    UnauthorizedError:
+      description: User is unauthorized to perform the action
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/errorMessage'
+    UserAlreadyExistsError:
+      description: User Already exists
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/errorMessage'
+    UserDoesnotExistError:
+      description: User doesnot exist
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/errorMessage'
+  parameters:
+    jobID:
+      name: id
+      in: path
+      description: Job ID
+      required: true
+      schema:
+        type: string
+    region:
+      name: id
+      in: query
+      description: Region
+      required: true
+      schema:
+        type: string
+    instance_id:
+      name: id
+      in: query
+      description: Instance ID
+      required: true
+      schema:
+        type: string
+  schemas:
+    errorMessage:
+      type: object
+      required:
+      - error
+      properties:
+        error:
+          type: string
+          required:
+          - error
+          properties:
+            error:
+              type: string
+              description: Error description

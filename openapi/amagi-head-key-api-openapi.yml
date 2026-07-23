@@ -1,0 +1,98 @@
+openapi: 3.0.0
+info:
+  description: 'The purpose of this application is to provide documentation of the APIs in services-amagi-tv
+
+
+    # Authentication
+
+
+    <!-- ReDoc-Inject: <security-definitions> -->'
+  title: services-amagi-tv Add User Head Key API
+  contact:
+    email: suvrojyoti@amagi.com
+  version: null
+servers:
+- url: https://r5i37dwfp8.execute-api.us-east-1.amazonaws.com/dev/
+  description: Development Server
+- url: https://services.amagi.tv
+  description: Production Server
+tags:
+- name: Head Key
+paths:
+  /head-key:
+    get:
+      security:
+      - access-key: []
+        secret-key: []
+      summary: Get metadata of the key
+      operationId: headKey
+      parameters:
+      - name: key
+        in: query
+        schema:
+          type: string
+        required: true
+        description: Key of the Object
+      responses:
+        '200':
+          description: Display metadata of the Key
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - data
+                properties:
+                  data:
+                    type: string
+                    description: Metadata of the key
+                  error:
+                    type: string
+                    description: User Error
+                example:
+                  data:
+                    AcceptRanges: bytes
+                    ContentLength: 24
+                    ContentType: binary/octet-stream
+                    ETag: 81e9e47ca1dc97db927e191eddd270c9
+                    LastModified: Mon, 26 Jul 2021 09:22:55 GMT
+                    Metadata: {}
+                    VersionId: gEvCTXiCVLUEtIfuBxiCl3xh5aY2PpJJ
+                  error: null
+        '401':
+          $ref: '#/components/responses/ServiceError'
+        '500':
+          description: Internal Server Error
+      tags:
+      - Head Key
+components:
+  schemas:
+    errorMessage:
+      type: object
+      required:
+      - error
+      properties:
+        error:
+          type: string
+          required:
+          - error
+          properties:
+            error:
+              type: string
+              description: Error description
+  responses:
+    ServiceError:
+      description: Service error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/errorMessage'
+  securitySchemes:
+    access-key:
+      type: apiKey
+      in: header
+      name: access_key
+    secret-key:
+      type: apiKey
+      in: header
+      name: secret_key

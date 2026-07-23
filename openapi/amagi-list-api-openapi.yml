@@ -1,0 +1,233 @@
+openapi: 3.0.0
+info:
+  description: 'The purpose of this application is to provide documentation of the APIs in services-amagi-tv
+
+
+    # Authentication
+
+
+    <!-- ReDoc-Inject: <security-definitions> -->'
+  title: services-amagi-tv Add User List API
+  contact:
+    email: suvrojyoti@amagi.com
+  version: null
+servers:
+- url: https://r5i37dwfp8.execute-api.us-east-1.amazonaws.com/dev/
+  description: Development Server
+- url: https://services.amagi.tv
+  description: Production Server
+tags:
+- name: List
+paths:
+  /list:
+    get:
+      security:
+      - TokenAuth: []
+      summary: Returns list of jobs, requires monitor/operator access
+      parameters:
+      - name: customer
+        in: query
+        schema:
+          type: string
+        required: true
+        description: Customer Name
+      - name: start_time
+        in: query
+        schema:
+          type: number
+        required: true
+        description: Job Submission time in epoch milliseconds FROM where to filter
+      - name: end_time
+        in: query
+        schema:
+          type: number
+        required: true
+        description: Job Submission time in epoch milliseconds UPTO where to filter
+      - name: id
+        in: query
+        schema:
+          type: string
+        required: false
+        description: Submitter Job Classification Identifier
+      - name: cloud
+        in: query
+        schema:
+          $ref: '#/components/schemas/cloudProvider'
+        required: false
+        description: Cloud Provider
+      - name: region
+        schema:
+          type: string
+        required: false
+        in: query
+        description: Region name of deployment as per cloud provider
+      responses:
+        '200':
+          description: Retuns list of jobs
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  response:
+                    type: array
+                    items:
+                      type: object
+                      required:
+                      - resources
+                      - image
+                      - status
+                      - command
+                      - env
+                      - tags
+                      - submitted_at
+                      - priority
+                      properties:
+                        cloud_provider:
+                          $ref: '#/components/schemas/cloudProvider'
+                        resources:
+                          $ref: '#/components/schemas/resources'
+                        image:
+                          $ref: '#/components/schemas/dockerImage'
+                        status:
+                          $ref: '#/components/schemas/JobStatus'
+                        region:
+                          $ref: '#/components/schemas/region'
+                        id:
+                          $ref: '#/components/schemas/jobID'
+                        command:
+                          $ref: '#/components/schemas/command'
+                        env:
+                          $ref: '#/components/schemas/env'
+                        tags:
+                          $ref: '#/components/schemas/tags'
+                        priority:
+                          $ref: '#/components/schemas/Priority'
+                        submitted_at:
+                          type: integer
+                          format: int64
+                          description: Epoch time at which job was submitted
+                        started_at:
+                          type: integer
+                          format: int64
+                          description: Epoch time at ehich job was started
+                        finished_at:
+                          type: integer
+                          format: int64
+                          description: Epoch time at which job was finished
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '500':
+          description: Internal Server Error
+      tags:
+      - List
+components:
+  schemas:
+    region:
+      type: string
+      description: Cloud Provider region where the job was scheduled
+      title: region represents the region where the job was scheduled
+    Priority:
+      description: Job priority
+      title: priority represents the Job priority
+      type: string
+      enum:
+      - HIGH
+      - LOW
+    cloudProvider:
+      description: Cloud provider
+      title: cloud_provider represents the list of all cloud providers supported
+      type: string
+      enum:
+      - aws
+      - azure
+    tags:
+      type: object
+      additionalProperties: true
+      description: Customer submitter tags
+      title: tags represents the custom tags used to tag the job
+    resources:
+      description: Compute resources
+      title: resources represents the compute resources required to run the job
+      type: object
+      properties:
+        vcpus:
+          type: integer
+          description: vcpus required to run the job
+        memory:
+          type: number
+          format: float
+          description: Memory in GB required to run the job
+    dockerImage:
+      title: dockerImage represents the docker image url
+      type: string
+      description: Docker image url
+    errorMessage:
+      type: object
+      required:
+      - error
+      properties:
+        error:
+          type: object
+          required:
+          - status
+          - message
+          - code
+          properties:
+            status:
+              type: integer
+              description: HTTP Status Code
+            message:
+              type: string
+              description: Error description
+            code:
+              type: string
+              description: Pre defined Error code
+    env:
+      type: object
+      additionalProperties:
+        type: string
+      description: Key pair values of environment variables
+      title: env represents the environment variables passed to the container
+    jobID:
+      title: jobID represents the jobID of the submitted job
+      type: string
+      description: Job ID
+    JobStatus:
+      description: Job status
+      title: status represents the Job status
+      type: string
+      enum:
+      - REJECTED
+      - QUEUED
+      - RUNNING
+      - FAILED
+      - SUCCEEDED
+      - CANCELLING
+      - CANCELLED
+    command:
+      description: Docker arguments
+      title: command represents the docker arguments passed to the container
+      type: array
+      items:
+        type: string
+  responses:
+    UnauthorizedError:
+      description: Token key is missing or invalid
+      headers:
+        WWW_Authenticate:
+          schema:
+            type: string
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/errorMessage'
+  securitySchemes:
+    access-key:
+      type: apiKey
+      in: header
+      name: access_key
+    secret-key:
+      type: apiKey
+      in: header
+      name: secret_key

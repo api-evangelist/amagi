@@ -1,0 +1,41 @@
+generated: '2026-07-17'
+method: derived
+source:
+- openapi/amagi-mapsor-openapi.yml
+- openapi/amagi-callisto-openapi.yml
+entities:
+- name: user
+  api: mapsor
+  fields:
+  - token
+  note: Mapsor user with generated token.
+- name: job
+  api: mapsor
+  fields:
+  - jobID
+  - command
+  - dockerImage
+  - region
+  - queue
+  - priority
+  - timeout
+  - tags
+  - env
+  - ami
+  - resources
+  note: Container job submitted to Mapsor.
+- name: customer
+  api: callisto
+  note: services-amagi-tv customer entry.
+- name: key
+  api: callisto
+  note: Key with versions, scoped to a customer.
+relationships:
+- from: key
+  to: customer
+  type: belongs_to
+  via: customer
+- from: job
+  to: user
+  type: belongs_to
+  via: token

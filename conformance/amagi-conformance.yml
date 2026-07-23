@@ -1,0 +1,27 @@
+generated: '2026-07-17'
+method: derived
+source:
+- openapi/amagi-mapsor-openapi.yml
+- openapi/amagi-callisto-openapi.yml
+standards:
+- id: openapi-3.0
+  conforms: true
+  evidence: Both specs declare openapi 3.0.0.
+- id: oauth2
+  conforms: false
+  evidence: Security schemes are apiKey only (token / access_key+secret_key).
+- id: oidc
+  conforms: false
+- id: rfc9457-problem-details
+  conforms: false
+  evidence: Errors use a custom {error:...} envelope, not application/problem+json.
+- id: rfc8594-sunset
+  conforms: false
+- id: pagination
+  conforms: false
+  evidence: No pagination parameters present.
+- id: idempotency
+  conforms: false
+  evidence: No Idempotency-Key surface.
+- id: json-api
+  conforms: false

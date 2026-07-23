@@ -1,0 +1,135 @@
+openapi: 3.0.0
+info:
+  description: 'The purpose of this application is to provide documentation of the APIs in services-amagi-tv
+
+
+    # Authentication
+
+
+    <!-- ReDoc-Inject: <security-definitions> -->'
+  title: services-amagi-tv Add User Get Metrics API
+  contact:
+    email: suvrojyoti@amagi.com
+  version: null
+servers:
+- url: https://r5i37dwfp8.execute-api.us-east-1.amazonaws.com/dev/
+  description: Development Server
+- url: https://services.amagi.tv
+  description: Production Server
+tags:
+- name: Get Metrics
+paths:
+  /get-metrics:
+    get:
+      security:
+      - TokenAuth: []
+      summary: Returns list of jobs, requires admin access
+      parameters:
+      - name: start_date
+        in: query
+        schema:
+          type: number
+        required: true
+        description: Time in epoch milliseconds FROM where to filter
+      - name: end_date
+        in: query
+        schema:
+          type: number
+        required: true
+        description: Time in epoch milliseconds UPTO where to filter
+      - name: cloud_provider
+        in: query
+        schema:
+          $ref: '#/components/schemas/cloudProvider'
+        required: true
+        description: Cloud Provider
+      - name: region
+        schema:
+          type: string
+        required: true
+        in: query
+        description: Region name of deployment as per cloud provider
+      - name: price
+        schema:
+          type: int64
+        required: false
+        in: query
+        description: Total price to be charged. If given, the API returns cost per customer
+      responses:
+        '200':
+          description: Retuns list of jobs
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  response:
+                    type: object
+                    items:
+                      type: object
+                      required:
+                      - metrics
+        '400':
+          $ref: '#/components/responses/badRequestError'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '500':
+          description: Internal Server Error
+      tags:
+      - Get Metrics
+components:
+  schemas:
+    errorMessage:
+      type: object
+      required:
+      - error
+      properties:
+        error:
+          type: object
+          required:
+          - status
+          - message
+          - code
+          properties:
+            status:
+              type: integer
+              description: HTTP Status Code
+            message:
+              type: string
+              description: Error description
+            code:
+              type: string
+              description: Pre defined Error code
+    cloudProvider:
+      description: Cloud provider
+      title: cloud_provider represents the list of all cloud providers supported
+      type: string
+      enum:
+      - aws
+      - azure
+  responses:
+    UnauthorizedError:
+      description: Token key is missing or invalid
+      headers:
+        WWW_Authenticate:
+          schema:
+            type: string
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/errorMessage'
+    badRequestError:
+      description: Bad request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/errorMessage'
+  securitySchemes:
+    access-key:
+      type: apiKey
+      in: header
+      name: access_key
+    secret-key:
+      type: apiKey
+      in: header
+      name: secret_key

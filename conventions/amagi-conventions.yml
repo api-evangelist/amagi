@@ -1,0 +1,35 @@
+generated: '2026-07-17'
+method: derived
+source:
+- openapi/amagi-mapsor-openapi.yml
+- openapi/amagi-callisto-openapi.yml
+authentication:
+  style: api-key
+  mapsor: apiKey in query parameter `token` (TokenAuth).
+  callisto: 'Two apiKey headers required together: `access_key` and `secret_key`.'
+  ref: authentication/amagi-authentication.yml
+idempotency:
+  supported: false
+  note: No idempotency-key header or parameter documented in either spec.
+pagination:
+  supported: false
+  note: No pagination parameters/fields present; list endpoints return full collections.
+field_expansion:
+  supported: false
+metadata:
+  supported: true
+  note: Mapsor job submission accepts free-form `tags` and `env` maps on the job object.
+request_tracing:
+  supported: false
+  note: No request-id/correlation header documented.
+versioning:
+  style: host/stage
+  note: Environments separated by host (dev execute-api stage vs production api.* host); Mapsor info.version
+    0.2.0.
+error_envelope:
+  ref: errors/amagi-problem-types.yml
+  shape: JSON {error:{status,message,code}} (mapsor) / {error:string} (callisto)
+rate_limit_signaling:
+  supported: false
+  note: No rate-limit headers documented; both APIs front AWS API Gateway which may enforce account-level
+    throttling.

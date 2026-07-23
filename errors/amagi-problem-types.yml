@@ -1,0 +1,52 @@
+generated: '2026-07-17'
+method: derived
+source:
+- openapi/amagi-mapsor-openapi.yml
+- openapi/amagi-callisto-openapi.yml
+format: custom-error-envelope
+note: 'Neither API uses RFC 9457 application/problem+json. Errors are returned as a JSON envelope. Mapsor:
+  {"error":{"status","message","code"}}. Callisto (services-amagi-tv): {"error":"<description>"}.'
+envelope:
+  mapsor:
+    field: error
+    shape:
+      status: integer (HTTP status)
+      message: string
+      code: string (predefined error code)
+  callisto:
+    field: error
+    shape: string (error description)
+problems:
+- status: 400
+  title: Bad Request
+  meaning: Malformed request body or invalid parameters.
+  apis:
+  - mapsor
+- status: 401
+  title: Unauthorized
+  meaning: Missing or invalid API credentials (token / access_key+secret_key).
+  apis:
+  - mapsor
+  - callisto
+- status: 403
+  title: Forbidden
+  meaning: Authenticated principal lacks permission for the operation.
+  apis:
+  - mapsor
+- status: 404
+  title: Not Found
+  meaning: Referenced job/user/resource id does not exist.
+  apis:
+  - mapsor
+- status: 409
+  title: Conflict
+  meaning: Resource already exists or state conflict (e.g. duplicate user/customer).
+  apis:
+  - mapsor
+  - callisto
+- status: 500
+  title: Internal Server Error
+  meaning: Unexpected server-side failure.
+  apis:
+  - mapsor
+  - callisto

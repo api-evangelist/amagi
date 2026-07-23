@@ -1,0 +1,16 @@
+generated: '2026-07-17'
+method: searched
+source: https://github.com/amagioss
+note: Amagi does not publish client SDKs for the Mapsor or services-amagi-tv APIs. The one first-party
+  published package is SLV (Secure Local Vault), an Amagi open-source secret-management tool/library —
+  cataloged here as official OSS, not as an API client SDK.
+packages:
+- language: go
+  registry: go-modules
+  name: oss.amagi.com/slv
+  url: https://pkg.go.dev/oss.amagi.com/slv
+  install: go get oss.amagi.com/slv
+  repo: https://github.com/amagioss/slv
+  license: MIT
+  official: true
+  kind: oss-utility

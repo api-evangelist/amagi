@@ -1,0 +1,113 @@
+openapi: 3.0.0
+info:
+  description: 'The purpose of this application is to provide documentation of the APIs in services-amagi-tv
+
+
+    # Authentication
+
+
+    <!-- ReDoc-Inject: <security-definitions> -->'
+  title: services-amagi-tv Add User Create Customer API
+  contact:
+    email: suvrojyoti@amagi.com
+  version: null
+servers:
+- url: https://r5i37dwfp8.execute-api.us-east-1.amazonaws.com/dev/
+  description: Development Server
+- url: https://services.amagi.tv
+  description: Production Server
+tags:
+- name: Create Customer
+paths:
+  /create-customer:
+    post:
+      security:
+      - access-key: []
+        secret-key: []
+      summary: Creates a new customer, requires admin access_key and secret_key
+      operationId: createNewCustomerEntry
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - customer_name
+              properties:
+                user:
+                  type: string
+                  description: Customer Name
+              example:
+                user: CUSTOMER-NAME
+      responses:
+        '200':
+          description: Successfully Created user
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - data
+                properties:
+                  data:
+                    type: string
+                    description: User Credentials
+                  error:
+                    type: string
+                    description: User Error
+                example:
+                  data:
+                    Pubnub:
+                      auth_key: xxxxxxxxxx
+                      publish_key: pub-x-xxxx-xxx-xxxx
+                      subscribe_key: sub-x-xxxx-xxx-xxxx
+                    access_key: xxxxxxxxxxxx
+                    secret_key: xxxxx+xxxxxxx.xxxxx-xx
+                    user_name: CUSTOMER-NAME
+                  error: null
+        '401':
+          $ref: '#/components/responses/ServiceError'
+        '409':
+          $ref: '#/components/responses/UserAlreadyExistsError'
+        '500':
+          description: Internal Server Error
+      tags:
+      - Create Customer
+components:
+  schemas:
+    errorMessage:
+      type: object
+      required:
+      - error
+      properties:
+        error:
+          type: string
+          required:
+          - error
+          properties:
+            error:
+              type: string
+              description: Error description
+  responses:
+    ServiceError:
+      description: Service error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/errorMessage'
+    UserAlreadyExistsError:
+      description: User Already exists
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/errorMessage'
+  securitySchemes:
+    access-key:
+      type: apiKey
+      in: header
+      name: access_key
+    secret-key:
+      type: apiKey
+      in: header
+      name: secret_key

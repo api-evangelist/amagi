@@ -1,0 +1,786 @@
+openapi: 3.0.0
+info:
+  description: 'The purpose of this application is to provide documentation of the APIs in mapsor
+
+
+    # Authentication
+
+
+    <!-- ReDoc-Inject: <security-definitions> -->'
+  title: Mapsor API
+  contact:
+    email: arpitm@amagi.com
+  version: 0.2.0
+servers:
+- url: https://pbohw6r8e1.execute-api.us-east-1.amazonaws.com/dev/?token=Vqv80iwJyHVPreFu47dNYg
+  description: Development Server
+- url: https://api.mapsor.amagi.tv
+  description: Production Server
+paths:
+  /add-user:
+    post:
+      security:
+      - TokenAuth: []
+      summary: Adds a new user, requires admin's auth token
+      operationId: createNewUserEntry
+      parameters:
+      - name: role
+        in: query
+        description: role of the user, default role is operator
+        required: false
+        type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - user
+              properties:
+                user:
+                  type: string
+                  description: Username
+              example:
+                user: cloudport
+      responses:
+        '201':
+          description: Successfully Added user
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - token
+                - message
+                properties:
+                  token:
+                    type: string
+                    description: Token
+                  message:
+                    type: string
+                    description: User message
+                example:
+                  token: kjrtklnhgcyk
+                  message: Please keep the token safely. It cannot be retrieved again
+        '400':
+          $ref: '#/components/responses/badRequestError'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/forbiddenError'
+        '409':
+          $ref: '#/components/responses/conflictResourceError'
+        '500':
+          description: Internal Server Error
+  /regenerate-token:
+    post:
+      security:
+      - TokenAuth: []
+      summary: Regenerates auth token for an existing user, requires admin's auth token
+      operationId: regenerateTokenForExistingUser
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - user
+              properties:
+                user:
+                  type: string
+                  description: Username
+              example:
+                user: cloudport
+      responses:
+        '201':
+          description: Successfully Regenerated token for user
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - token
+                - message
+                properties:
+                  token:
+                    type: string
+                    description: Token
+                  message:
+                    type: string
+                    description: User message
+                example:
+                  token: kjrtklnhgcyk
+                  message: Please keep the token safely. It cannot be retrieved again
+        '400':
+          $ref: '#/components/responses/badRequestError'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/forbiddenError'
+        '409':
+          $ref: '#/components/responses/conflictResourceError'
+        '500':
+          description: Internal Server Error
+  /enable-user:
+    post:
+      security:
+      - TokenAuth: []
+      summary: Enables user, requires admin's auth token
+      operationId: enableUser
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - user
+              properties:
+                user:
+                  type: string
+                  description: Username
+              example:
+                user: cloudport
+      responses:
+        '201':
+          description: Successfully enabled user
+          content:
+            text/plain:
+              schema:
+                type: text
+                example:
+                  message: Successfully enabled user
+        '400':
+          $ref: '#/components/responses/badRequestError'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/forbiddenError'
+        '409':
+          $ref: '#/components/responses/conflictResourceError'
+        '500':
+          description: Internal Server Error
+  /disable-user:
+    post:
+      security:
+      - TokenAuth: []
+      summary: disables user, requires admin's auth token
+      operationId: disableUser
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - user
+              properties:
+                user:
+                  type: string
+                  description: Username
+              example:
+                user: cloudport
+      responses:
+        '201':
+          description: Successfully disabled user
+          content:
+            text/plain:
+              schema:
+                type: text
+                example:
+                  message: Successfully disabled user
+        '400':
+          $ref: '#/components/responses/badRequestError'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/forbiddenError'
+        '409':
+          $ref: '#/components/responses/conflictResourceError'
+        '500':
+          description: Internal Server Error
+  /submit:
+    post:
+      security:
+      - TokenAuth: []
+      summary: Schedules a container job, requires operator's access
+      operationId: createContainerJob
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - cloud
+              - region
+              - id
+              - image/ami
+              - customer
+              - command/user_data
+              properties:
+                customer:
+                  $ref: '#/components/schemas/customer'
+                cloud:
+                  $ref: '#/components/schemas/cloudProvider'
+                region:
+                  $ref: '#/components/schemas/region'
+                env:
+                  $ref: '#/components/schemas/env'
+                id:
+                  type: string
+                  description: Submitter Job Classification Identifier
+                tags:
+                  $ref: '#/components/schemas/tags'
+                resources:
+                  $ref: '#/components/schemas/resources'
+                image:
+                  $ref: '#/components/schemas/dockerImage'
+                command:
+                  $ref: '#/components/schemas/command'
+                ami:
+                  $ref: '#/components/schemas/ami'
+                user_data:
+                  $ref: '#/components/schemas/user_data'
+                priority:
+                  $ref: '#/components/schemas/Priority'
+                timeout:
+                  $ref: '#/components/schemas/timeout'
+                queue:
+                  $ref: '#/components/schemas/queue'
+            example:
+              cloud: aws
+              region: us-east-1
+              env:
+                asset_id: '23'
+                host: example.com
+              id: Transcode_23
+              customer: lightning
+              tags:
+                channel_code: RIALT_203
+              resources:
+                vcpus: 1
+                memory: 0.5
+              image/ami: hello-world:linux
+              command/user_data: '[]/<some_user_data>'
+              priority/queue: HIGH/<queue_name>
+      responses:
+        '200':
+          description: queued container job
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/newJob'
+        '400':
+          $ref: '#/components/responses/badRequestError'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '500':
+          description: Internal Server Error
+  /status/{id}:
+    get:
+      security:
+      - TokenAuth: []
+      summary: Gets status of a submitted job, requires operator access
+      parameters:
+      - $ref: '#/components/parameters/jobID'
+      responses:
+        '200':
+          description: Job status
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - status
+                properties:
+                  status:
+                    $ref: '#/components/schemas/JobStatus'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          $ref: '#/components/responses/notFoundError'
+        '500':
+          description: Internal Server Error
+  /cancel/{id}:
+    get:
+      security:
+      - TokenAuth: []
+      summary: Cancel a job, requires operator access
+      parameters:
+      - $ref: '#/components/parameters/jobID'
+      responses:
+        '200':
+          description: Cancel a job
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - response
+                properties:
+                  response:
+                    type: string
+                    description: Response
+        '400':
+          $ref: '#/components/responses/badRequestError'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          $ref: '#/components/responses/notFoundError'
+        '500':
+          description: Internal Server Error
+  /retry/{id}:
+    get:
+      security:
+      - TokenAuth: []
+      summary: Retry a previous job, requires operator access
+      parameters:
+      - $ref: '#/components/parameters/jobID'
+      responses:
+        '200':
+          description: Retry a previous job
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/newJob'
+        '400':
+          $ref: '#/components/responses/badRequestError'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          $ref: '#/components/responses/notFoundError'
+        '500':
+          description: Internal Server Error
+  /logs/{id}:
+    get:
+      security:
+      - TokenAuth: []
+      summary: Returns logs of a job, requires operator access
+      parameters:
+      - $ref: '#/components/parameters/jobID'
+      responses:
+        '200':
+          description: Returns logs of a job
+          content:
+            text/plain:
+              schema:
+                type: string
+        '400':
+          $ref: '#/components/responses/badRequestError'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          $ref: '#/components/responses/notFoundError'
+        '500':
+          description: Internal Server Error
+  /list:
+    get:
+      security:
+      - TokenAuth: []
+      summary: Returns list of jobs, requires monitor/operator access
+      parameters:
+      - name: customer
+        in: query
+        schema:
+          type: string
+        required: true
+        description: Customer Name
+      - name: start_time
+        in: query
+        schema:
+          type: number
+        required: true
+        description: Job Submission time in epoch milliseconds FROM where to filter
+      - name: end_time
+        in: query
+        schema:
+          type: number
+        required: true
+        description: Job Submission time in epoch milliseconds UPTO where to filter
+      - name: id
+        in: query
+        schema:
+          type: string
+        required: false
+        description: Submitter Job Classification Identifier
+      - name: cloud
+        in: query
+        schema:
+          $ref: '#/components/schemas/cloudProvider'
+        required: false
+        description: Cloud Provider
+      - name: region
+        schema:
+          type: string
+        required: false
+        in: query
+        description: Region name of deployment as per cloud provider
+      responses:
+        '200':
+          description: Retuns list of jobs
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  response:
+                    type: array
+                    items:
+                      type: object
+                      required:
+                      - resources
+                      - image
+                      - status
+                      - command
+                      - env
+                      - tags
+                      - submitted_at
+                      - priority
+                      properties:
+                        cloud_provider:
+                          $ref: '#/components/schemas/cloudProvider'
+                        resources:
+                          $ref: '#/components/schemas/resources'
+                        image:
+                          $ref: '#/components/schemas/dockerImage'
+                        status:
+                          $ref: '#/components/schemas/JobStatus'
+                        region:
+                          $ref: '#/components/schemas/region'
+                        id:
+                          $ref: '#/components/schemas/jobID'
+                        command:
+                          $ref: '#/components/schemas/command'
+                        env:
+                          $ref: '#/components/schemas/env'
+                        tags:
+                          $ref: '#/components/schemas/tags'
+                        priority:
+                          $ref: '#/components/schemas/Priority'
+                        submitted_at:
+                          type: integer
+                          format: int64
+                          description: Epoch time at which job was submitted
+                        started_at:
+                          type: integer
+                          format: int64
+                          description: Epoch time at ehich job was started
+                        finished_at:
+                          type: integer
+                          format: int64
+                          description: Epoch time at which job was finished
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '500':
+          description: Internal Server Error
+  /get-info/{region}/{instance_id}:
+    get:
+      security:
+      - TokenAuth: []
+      summary: Returns pubnub info of a ec2 job, requires operator access, this will be Successfull only
+        if the spot request is visible. Ideally this request should come from the spot.
+      parameters:
+      - $ref: '#/components/parameters/region'
+      - $ref: '#/components/parameters/instance_id'
+      responses:
+        '201':
+          description: Pubnub info
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - job_id
+                - publish_key
+                - subscribe_key
+                properties:
+                  token:
+                    type: string
+                    description: job id
+                  publish_key:
+                    type: string
+                    description: publish key
+                  subscribe_key:
+                    type: string
+                    description: subscribe key
+                example:
+                  job_id: 3892fea6-df92-11e9-9d97-f2a54137d40c
+                  publish_key: pub-c-xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+                  subscribe_key: sub-c-xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+        '400':
+          $ref: '#/components/responses/badRequestError'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '500':
+          description: Internal Server Error
+  /destroy/{region}/{instance_id}:
+    get:
+      security:
+      - TokenAuth: []
+      summary: Terminates instance of a ec2 job, requires operator access, this will be Successfull only
+        if the spot request is visible. Ideally this request should come from the spot.
+      parameters:
+      - $ref: '#/components/parameters/region'
+      - $ref: '#/components/parameters/instance_id'
+      responses:
+        '201':
+          description: Pubnub info
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - response
+                properties:
+                  response:
+                    type: string
+                    description: response
+                example:
+                  response: Terminated instance
+        '400':
+          $ref: '#/components/responses/badRequestError'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '500':
+          description: Internal Server Error
+  /get-metrics:
+    get:
+      security:
+      - TokenAuth: []
+      summary: Returns list of jobs, requires admin access
+      parameters:
+      - name: start_date
+        in: query
+        schema:
+          type: number
+        required: true
+        description: Time in epoch milliseconds FROM where to filter
+      - name: end_date
+        in: query
+        schema:
+          type: number
+        required: true
+        description: Time in epoch milliseconds UPTO where to filter
+      - name: cloud_provider
+        in: query
+        schema:
+          $ref: '#/components/schemas/cloudProvider'
+        required: true
+        description: Cloud Provider
+      - name: region
+        schema:
+          type: string
+        required: true
+        in: query
+        description: Region name of deployment as per cloud provider
+      - name: price
+        schema:
+          type: int64
+        required: false
+        in: query
+        description: Total price to be charged. If given, the API returns cost per customer
+      responses:
+        '200':
+          description: Retuns list of jobs
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  response:
+                    type: object
+                    items:
+                      type: object
+                      required:
+                      - metrics
+        '400':
+          $ref: '#/components/responses/badRequestError'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '500':
+          description: Internal Server Error
+components:
+  securitySchemes:
+    TokenAuth:
+      type: apiKey
+      in: query
+      name: token
+  responses:
+    badRequestError:
+      description: Bad request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/errorMessage'
+    forbiddenError:
+      description: Forbidden to access the resource
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/errorMessage'
+    notFoundError:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/errorMessage'
+    conflictResourceError:
+      description: Image Already exists
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/errorMessage'
+    UnauthorizedError:
+      description: Token key is missing or invalid
+      headers:
+        WWW_Authenticate:
+          schema:
+            type: string
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/errorMessage'
+  parameters:
+    jobID:
+      name: id
+      in: path
+      description: Job ID
+      required: true
+      schema:
+        type: string
+    region:
+      name: id
+      in: query
+      description: Region
+      required: true
+      schema:
+        type: string
+    instance_id:
+      name: id
+      in: query
+      description: Instance ID
+      required: true
+      schema:
+        type: string
+  schemas:
+    errorMessage:
+      type: object
+      required:
+      - error
+      properties:
+        error:
+          type: object
+          required:
+          - status
+          - message
+          - code
+          properties:
+            status:
+              type: integer
+              description: HTTP Status Code
+            message:
+              type: string
+              description: Error description
+            code:
+              type: string
+              description: Pre defined Error code
+    resources:
+      description: Compute resources
+      title: resources represents the compute resources required to run the job
+      type: object
+      properties:
+        vcpus:
+          type: integer
+          description: vcpus required to run the job
+        memory:
+          type: number
+          format: float
+          description: Memory in GB required to run the job
+    customer:
+      description: Customer
+      title: customer for which the job is run
+      type: string
+    cloudProvider:
+      description: Cloud provider
+      title: cloud_provider represents the list of all cloud providers supported
+      type: string
+      enum:
+      - aws
+      - azure
+    newJob:
+      description: Provides job id for a new job request submitted
+      title: newJob represents the response of new job id submitted
+      type: object
+      required:
+      - job_id
+      properties:
+        job_id:
+          type: string
+          description: Job ID
+    JobStatus:
+      description: Job status
+      title: status represents the Job status
+      type: string
+      enum:
+      - REJECTED
+      - QUEUED
+      - RUNNING
+      - FAILED
+      - SUCCEEDED
+      - CANCELLING
+      - CANCELLED
+    Priority:
+      description: Job priority
+      title: priority represents the Job priority
+      type: string
+      enum:
+      - HIGH
+      - LOW
+    env:
+      type: object
+      additionalProperties:
+        type: string
+      description: Key pair values of environment variables
+      title: env represents the environment variables passed to the container
+    tags:
+      type: object
+      additionalProperties: true
+      description: Customer submitter tags
+      title: tags represents the custom tags used to tag the job
+    command:
+      description: Docker arguments
+      title: command represents the docker arguments passed to the container
+      type: array
+      items:
+        type: string
+    jobID:
+      title: jobID represents the jobID of the submitted job
+      type: string
+      description: Job ID
+    region:
+      type: string
+      description: Cloud Provider region where the job was scheduled
+      title: region represents the region where the job was scheduled
+    dockerImage:
+      title: dockerImage represents the docker image url
+      type: string
+      description: Docker image url
+    timeout:
+      title: timeout for a job's execution
+      type: integer
+      description: Job timeout
+    queue:
+      title: Batch queue which needs to be used for Batch job submission
+      type: string
+      description: Job Queue
+    ami:
+      title: AMI which needs to be used for EC2 job submission
+      type: string
+      description: AMI
+    user_data:
+      title: user data which needs to be passed for EC2 job submission
+      type: string
+      description: User Data

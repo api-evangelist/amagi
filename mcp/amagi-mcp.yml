@@ -1,0 +1,45 @@
+generated: '2026-07-17'
+method: derived
+status: candidate
+note: No official Amagi hosted/remote MCP server found. Candidate tool list derived from documented OpenAPI
+  operations with operationIds.
+server:
+  name: amagi
+  transport: stdio
+tools:
+- name: mapsor_create_user
+  description: Create a new Mapsor user entry
+  source_operation: openapi/amagi-mapsor-openapi.yml#createNewUserEntry
+- name: mapsor_regenerate_token
+  description: Regenerate token for an existing Mapsor user
+  source_operation: openapi/amagi-mapsor-openapi.yml#regenerateTokenForExistingUser
+- name: mapsor_enable_user
+  description: Enable a Mapsor user
+  source_operation: openapi/amagi-mapsor-openapi.yml#enableUser
+- name: mapsor_disable_user
+  description: Disable a Mapsor user
+  source_operation: openapi/amagi-mapsor-openapi.yml#disableUser
+- name: mapsor_submit_job
+  description: Submit a container job
+  source_operation: openapi/amagi-mapsor-openapi.yml#createContainerJob
+- name: callisto_create_customer
+  description: Create a new services-amagi-tv customer entry
+  source_operation: openapi/amagi-callisto-openapi.yml#createNewCustomerEntry
+- name: callisto_delete_customer
+  description: Delete an existing customer
+  source_operation: openapi/amagi-callisto-openapi.yml#deleteExistingCustomer
+- name: callisto_set_key
+  description: Set a key
+  source_operation: openapi/amagi-callisto-openapi.yml#setKey
+- name: callisto_list_keys
+  description: List keys
+  source_operation: openapi/amagi-callisto-openapi.yml#listKeys
+- name: callisto_get_key
+  description: Get a key
+  source_operation: openapi/amagi-callisto-openapi.yml#getKey
+- name: callisto_head_key
+  description: Check key existence
+  source_operation: openapi/amagi-callisto-openapi.yml#headKey
+- name: callisto_list_versions
+  description: List key versions
+  source_operation: openapi/amagi-callisto-openapi.yml#listVersions

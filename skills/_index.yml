@@ -1,0 +1,14 @@
+generated: '2026-07-17'
+method: generated
+source:
+- openapi/amagi-mapsor-openapi.yml
+- openapi/amagi-callisto-openapi.yml
+skills:
+- file: amagi-mapsor-user-provisioning.md
+  name: Provision and manage Mapsor users
+  api: openapi/amagi-mapsor-openapi.yml
+  operations: [createNewUserEntry, regenerateTokenForExistingUser, enableUser, disableUser, createContainerJob]
+- file: amagi-callisto-key-management.md
+  name: Manage services-amagi-tv customers and keys
+  api: openapi/amagi-callisto-openapi.yml
+  operations: [createNewCustomerEntry, deleteExistingCustomer, setKey, getKey, headKey, listKeys, listVersions]

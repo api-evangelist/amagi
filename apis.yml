@@ -1,8 +1,27 @@
 aid: amagi
+accessModel:
+  pricing: unknown
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Self-serve signup
+  confidence: medium
+  source:
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/amagi.png
 name: Amagi
-description: 'Amagi is a company surfaced as a portfolio company of accel, norwest-venture-partners and
-  added to the API Evangelist network as a stub for enrichment. Sector: media. This profile is a lead
-  awaiting the enrichment pipeline.'
+description: 'Amagi is a cloud-based technology company for the broadcast and streaming television
+  industry. Its SaaS platform handles channel creation and playout, content distribution across
+  linear, FAST (free ad-supported streaming TV) and connected-TV (CTV) destinations, server-side
+  dynamic ad insertion and monetization, and viewership/ads analytics — letting content owners run
+  live, linear and VOD channels from the cloud. Founded in 2008 and backed by Accel and Norwest
+  Venture Partners, Amagi exposes internal operational REST APIs (Mapsor job/user orchestration and
+  the services-amagi-tv key/customer service) documented via ReDoc, plus open-source tooling such as
+  SLV. This profile was enriched by the API Evangelist pipeline from Amagi''s published OpenAPI and
+  public developer surface.'
 url: https://raw.githubusercontent.com/api-evangelist/amagi/refs/heads/main/apis.yml
 x-type: company
 x-source: vc-portfolio
@@ -17,12 +36,339 @@ modified: '2026-07-17'
 tags:
 - Company
 - Media
-apis: []
+- Broadcast
+- Streaming
+- Video
+- CTV
+- FAST
+- Advertising
+- Cloud
+- Playout
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 - FN: APIs.json
   email: info@apis.io
+apis:
+- aid: amagi:amagi-add-user-api
+  name: Amagi Add User API
+  description: The Add User API from Amagi — 1 operation(s) for add user.
+  humanURL: https://mapsor.amagi.tv/docs/
+  baseURL: https://api.mapsor.amagi.tv
+  tags:
+  - Add User
+  properties:
+  - type: OpenAPI
+    url: openapi/amagi-add-user-api-openapi.yml
+  - type: APIReference
+    url: https://mapsor.amagi.tv/docs/
+  - type: APIReference
+    url: https://docs-callisto.amagi.tv/
+- aid: amagi:amagi-cancel-api
+  name: Amagi Cancel API
+  description: The Cancel API from Amagi — 1 operation(s) for cancel.
+  humanURL: https://mapsor.amagi.tv/docs/
+  baseURL: https://api.mapsor.amagi.tv
+  tags:
+  - Cancel
+  properties:
+  - type: OpenAPI
+    url: openapi/amagi-cancel-api-openapi.yml
+  - type: APIReference
+    url: https://mapsor.amagi.tv/docs/
+  - type: APIReference
+    url: https://docs-callisto.amagi.tv/
+- aid: amagi:amagi-create-customer-api
+  name: Amagi Create Customer API
+  description: The Create Customer API from Amagi — 1 operation(s) for create customer.
+  humanURL: https://mapsor.amagi.tv/docs/
+  baseURL: https://api.mapsor.amagi.tv
+  tags:
+  - Create Customer
+  properties:
+  - type: OpenAPI
+    url: openapi/amagi-create-customer-api-openapi.yml
+  - type: APIReference
+    url: https://mapsor.amagi.tv/docs/
+  - type: APIReference
+    url: https://docs-callisto.amagi.tv/
+- aid: amagi:amagi-delete-customer-api
+  name: Amagi Delete Customer API
+  description: The Delete Customer API from Amagi — 1 operation(s) for delete customer.
+  humanURL: https://mapsor.amagi.tv/docs/
+  baseURL: https://api.mapsor.amagi.tv
+  tags:
+  - Delete Customer
+  properties:
+  - type: OpenAPI
+    url: openapi/amagi-delete-customer-api-openapi.yml
+  - type: APIReference
+    url: https://mapsor.amagi.tv/docs/
+  - type: APIReference
+    url: https://docs-callisto.amagi.tv/
+- aid: amagi:amagi-destroy-api
+  name: Amagi Destroy API
+  description: The Destroy API from Amagi — 1 operation(s) for destroy.
+  humanURL: https://mapsor.amagi.tv/docs/
+  baseURL: https://api.mapsor.amagi.tv
+  tags:
+  - Destroy
+  properties:
+  - type: OpenAPI
+    url: openapi/amagi-destroy-api-openapi.yml
+  - type: APIReference
+    url: https://mapsor.amagi.tv/docs/
+  - type: APIReference
+    url: https://docs-callisto.amagi.tv/
+- aid: amagi:amagi-disable-user-api
+  name: Amagi Disable User API
+  description: The Disable User API from Amagi — 1 operation(s) for disable user.
+  humanURL: https://mapsor.amagi.tv/docs/
+  baseURL: https://api.mapsor.amagi.tv
+  tags:
+  - Disable User
+  properties:
+  - type: OpenAPI
+    url: openapi/amagi-disable-user-api-openapi.yml
+  - type: APIReference
+    url: https://mapsor.amagi.tv/docs/
+  - type: APIReference
+    url: https://docs-callisto.amagi.tv/
+- aid: amagi:amagi-enable-user-api
+  name: Amagi Enable User API
+  description: The Enable User API from Amagi — 1 operation(s) for enable user.
+  humanURL: https://mapsor.amagi.tv/docs/
+  baseURL: https://api.mapsor.amagi.tv
+  tags:
+  - Enable User
+  properties:
+  - type: OpenAPI
+    url: openapi/amagi-enable-user-api-openapi.yml
+  - type: APIReference
+    url: https://mapsor.amagi.tv/docs/
+  - type: APIReference
+    url: https://docs-callisto.amagi.tv/
+- aid: amagi:amagi-get-info-api
+  name: Amagi Get Info API
+  description: The Get Info API from Amagi — 1 operation(s) for get info.
+  humanURL: https://mapsor.amagi.tv/docs/
+  baseURL: https://api.mapsor.amagi.tv
+  tags:
+  - Get Info
+  properties:
+  - type: OpenAPI
+    url: openapi/amagi-get-info-api-openapi.yml
+  - type: APIReference
+    url: https://mapsor.amagi.tv/docs/
+  - type: APIReference
+    url: https://docs-callisto.amagi.tv/
+- aid: amagi:amagi-get-key-api
+  name: Amagi Get Key API
+  description: The Get Key API from Amagi — 1 operation(s) for get key.
+  humanURL: https://mapsor.amagi.tv/docs/
+  baseURL: https://api.mapsor.amagi.tv
+  tags:
+  - Get Key
+  properties:
+  - type: OpenAPI
+    url: openapi/amagi-get-key-api-openapi.yml
+  - type: APIReference
+    url: https://mapsor.amagi.tv/docs/
+  - type: APIReference
+    url: https://docs-callisto.amagi.tv/
+- aid: amagi:amagi-get-metrics-api
+  name: Amagi Get Metrics API
+  description: The Get Metrics API from Amagi — 1 operation(s) for get metrics.
+  humanURL: https://mapsor.amagi.tv/docs/
+  baseURL: https://api.mapsor.amagi.tv
+  tags:
+  - Get Metrics
+  properties:
+  - type: OpenAPI
+    url: openapi/amagi-get-metrics-api-openapi.yml
+  - type: APIReference
+    url: https://mapsor.amagi.tv/docs/
+  - type: APIReference
+    url: https://docs-callisto.amagi.tv/
+- aid: amagi:amagi-head-key-api
+  name: Amagi Head Key API
+  description: The Head Key API from Amagi — 1 operation(s) for head key.
+  humanURL: https://mapsor.amagi.tv/docs/
+  baseURL: https://api.mapsor.amagi.tv
+  tags:
+  - Head Key
+  properties:
+  - type: OpenAPI
+    url: openapi/amagi-head-key-api-openapi.yml
+  - type: APIReference
+    url: https://mapsor.amagi.tv/docs/
+  - type: APIReference
+    url: https://docs-callisto.amagi.tv/
+- aid: amagi:amagi-list-api
+  name: Amagi List API
+  description: The List API from Amagi — 1 operation(s) for list.
+  humanURL: https://mapsor.amagi.tv/docs/
+  baseURL: https://api.mapsor.amagi.tv
+  tags:
+  - List
+  properties:
+  - type: OpenAPI
+    url: openapi/amagi-list-api-openapi.yml
+  - type: APIReference
+    url: https://mapsor.amagi.tv/docs/
+  - type: APIReference
+    url: https://docs-callisto.amagi.tv/
+- aid: amagi:amagi-list-keys-api
+  name: Amagi List Keys API
+  description: The List Keys API from Amagi — 1 operation(s) for list keys.
+  humanURL: https://mapsor.amagi.tv/docs/
+  baseURL: https://api.mapsor.amagi.tv
+  tags:
+  - List Keys
+  properties:
+  - type: OpenAPI
+    url: openapi/amagi-list-keys-api-openapi.yml
+  - type: APIReference
+    url: https://mapsor.amagi.tv/docs/
+  - type: APIReference
+    url: https://docs-callisto.amagi.tv/
+- aid: amagi:amagi-list-versions-api
+  name: Amagi List Versions API
+  description: The List Versions API from Amagi — 1 operation(s) for list versions.
+  humanURL: https://mapsor.amagi.tv/docs/
+  baseURL: https://api.mapsor.amagi.tv
+  tags:
+  - List Versions
+  properties:
+  - type: OpenAPI
+    url: openapi/amagi-list-versions-api-openapi.yml
+  - type: APIReference
+    url: https://mapsor.amagi.tv/docs/
+  - type: APIReference
+    url: https://docs-callisto.amagi.tv/
+- aid: amagi:amagi-logs-api
+  name: Amagi Logs API
+  description: The Logs API from Amagi — 1 operation(s) for logs.
+  humanURL: https://mapsor.amagi.tv/docs/
+  baseURL: https://api.mapsor.amagi.tv
+  tags:
+  - Logs
+  properties:
+  - type: OpenAPI
+    url: openapi/amagi-logs-api-openapi.yml
+  - type: APIReference
+    url: https://mapsor.amagi.tv/docs/
+  - type: APIReference
+    url: https://docs-callisto.amagi.tv/
+- aid: amagi:amagi-regenerate-token-api
+  name: Amagi Regenerate Token API
+  description: The Regenerate Token API from Amagi — 1 operation(s) for regenerate token.
+  humanURL: https://mapsor.amagi.tv/docs/
+  baseURL: https://api.mapsor.amagi.tv
+  tags:
+  - Regenerate Token
+  properties:
+  - type: OpenAPI
+    url: openapi/amagi-regenerate-token-api-openapi.yml
+  - type: APIReference
+    url: https://mapsor.amagi.tv/docs/
+  - type: APIReference
+    url: https://docs-callisto.amagi.tv/
+- aid: amagi:amagi-retry-api
+  name: Amagi Retry API
+  description: The Retry API from Amagi — 1 operation(s) for retry.
+  humanURL: https://mapsor.amagi.tv/docs/
+  baseURL: https://api.mapsor.amagi.tv
+  tags:
+  - Retry
+  properties:
+  - type: OpenAPI
+    url: openapi/amagi-retry-api-openapi.yml
+  - type: APIReference
+    url: https://mapsor.amagi.tv/docs/
+  - type: APIReference
+    url: https://docs-callisto.amagi.tv/
+- aid: amagi:amagi-set-key-api
+  name: Amagi Set Key API
+  description: The Set Key API from Amagi — 1 operation(s) for set key.
+  humanURL: https://mapsor.amagi.tv/docs/
+  baseURL: https://api.mapsor.amagi.tv
+  tags:
+  - Set Key
+  properties:
+  - type: OpenAPI
+    url: openapi/amagi-set-key-api-openapi.yml
+  - type: APIReference
+    url: https://mapsor.amagi.tv/docs/
+  - type: APIReference
+    url: https://docs-callisto.amagi.tv/
+- aid: amagi:amagi-status-api
+  name: Amagi Status API
+  description: The Status API from Amagi — 1 operation(s) for status.
+  humanURL: https://mapsor.amagi.tv/docs/
+  baseURL: https://api.mapsor.amagi.tv
+  tags:
+  - Status
+  properties:
+  - type: OpenAPI
+    url: openapi/amagi-status-api-openapi.yml
+  - type: APIReference
+    url: https://mapsor.amagi.tv/docs/
+  - type: APIReference
+    url: https://docs-callisto.amagi.tv/
+- aid: amagi:amagi-submit-api
+  name: Amagi Submit API
+  description: The Submit API from Amagi — 1 operation(s) for submit.
+  humanURL: https://mapsor.amagi.tv/docs/
+  baseURL: https://api.mapsor.amagi.tv
+  tags:
+  - Submit
+  properties:
+  - type: OpenAPI
+    url: openapi/amagi-submit-api-openapi.yml
+  - type: APIReference
+    url: https://mapsor.amagi.tv/docs/
+  - type: APIReference
+    url: https://docs-callisto.amagi.tv/
 common:
 - type: Website
   url: https://www.amagi.com/
+- type: Documentation
+  url: https://helpdocs.amagi.tv/
+- type: Support
+  url: https://support.amagi.tv/
+- type: GitHubOrganization
+  url: https://github.com/amagioss
+- type: Blog
+  url: https://www.amagi.com/blog
+- type: PrivacyPolicy
+  url: https://www.amagi.com/website-privacy-policy/
+- type: Authentication
+  url: authentication/amagi-authentication.yml
+- type: Conventions
+  url: conventions/amagi-conventions.yml
+- type: ErrorCatalog
+  url: errors/amagi-problem-types.yml
+- type: Conformance
+  url: conformance/amagi-conformance.yml
+- type: DataModel
+  url: data-model/amagi-data-model.yml
+- type: AgenticAccess
+  url: agentic-access/amagi-agentic-access.yml
+- type: DomainSecurity
+  url: security/amagi-domain-security.yml
+- type: MCPServer
+  url: mcp/amagi-mcp.yml
+- type: LLMsTxt
+  url: llms/amagi-llms.txt
+- type: Packages
+  url: packages/amagi-packages.yml
+- type: CLI
+  url: cli/amagi-cli.yml
+- type: AgentSkill
+  url: skills/_index.yml
+x-enrichment:
+  date: '2026-07-19'
+  status: backfilled
+  pass: local-v1
+  note: backfilled from .gitignore signal + verified work evidence

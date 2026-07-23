@@ -1,0 +1,116 @@
+openapi: 3.0.0
+info:
+  description: 'The purpose of this application is to provide documentation of the APIs in services-amagi-tv
+
+
+    # Authentication
+
+
+    <!-- ReDoc-Inject: <security-definitions> -->'
+  title: services-amagi-tv Add User Destroy API
+  contact:
+    email: suvrojyoti@amagi.com
+  version: null
+servers:
+- url: https://r5i37dwfp8.execute-api.us-east-1.amazonaws.com/dev/
+  description: Development Server
+- url: https://services.amagi.tv
+  description: Production Server
+tags:
+- name: Destroy
+paths:
+  /destroy/{region}/{instance_id}:
+    get:
+      security:
+      - TokenAuth: []
+      summary: Terminates instance of a ec2 job, requires operator access, this will be Successfull only if the spot request is visible. Ideally this request should come from the spot.
+      parameters:
+      - $ref: '#/components/parameters/region'
+      - $ref: '#/components/parameters/instance_id'
+      responses:
+        '201':
+          description: Pubnub info
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - response
+                properties:
+                  response:
+                    type: string
+                    description: response
+                example:
+                  response: Terminated instance
+        '400':
+          $ref: '#/components/responses/badRequestError'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '500':
+          description: Internal Server Error
+      tags:
+      - Destroy
+components:
+  parameters:
+    region:
+      name: id
+      in: query
+      description: Region
+      required: true
+      schema:
+        type: string
+    instance_id:
+      name: id
+      in: query
+      description: Instance ID
+      required: true
+      schema:
+        type: string
+  schemas:
+    errorMessage:
+      type: object
+      required:
+      - error
+      properties:
+        error:
+          type: object
+          required:
+          - status
+          - message
+          - code
+          properties:
+            status:
+              type: integer
+              description: HTTP Status Code
+            message:
+              type: string
+              description: Error description
+            code:
+              type: string
+              description: Pre defined Error code
+  responses:
+    badRequestError:
+      description: Bad request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/errorMessage'
+    UnauthorizedError:
+      description: Token key is missing or invalid
+      headers:
+        WWW_Authenticate:
+          schema:
+            type: string
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/errorMessage'
+  securitySchemes:
+    access-key:
+      type: apiKey
+      in: header
+      name: access_key
+    secret-key:
+      type: apiKey
+      in: header
+      name: secret_key

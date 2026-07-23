@@ -1,0 +1,107 @@
+openapi: 3.0.0
+info:
+  description: 'The purpose of this application is to provide documentation of the APIs in services-amagi-tv
+
+
+    # Authentication
+
+
+    <!-- ReDoc-Inject: <security-definitions> -->'
+  title: services-amagi-tv Add User Set Key API
+  contact:
+    email: suvrojyoti@amagi.com
+  version: null
+servers:
+- url: https://r5i37dwfp8.execute-api.us-east-1.amazonaws.com/dev/
+  description: Development Server
+- url: https://services.amagi.tv
+  description: Production Server
+tags:
+- name: Set Key
+paths:
+  /set-key:
+    post:
+      security:
+      - access-key: []
+        secret-key: []
+      summary: Sets key with provided value, requires user access_key and secret_key
+      operationId: setKey
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - key
+              - data
+              properties:
+                key:
+                  type: string
+                  description: key where data needs to be written
+                data:
+                  type: string
+                  description: data that the customer wants to write
+              example:
+                key: CUSTOMER-NAME/FEED/fileconfig.txt
+                data: example configuration
+      responses:
+        '200':
+          description: Successfully wrote data in the key
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - data
+                properties:
+                  data:
+                    type: string
+                    description: key information data
+                  error:
+                    type: string
+                    description: User Error
+                example:
+                  data:
+                    Date: Wed, 28 Jul 2021 07:11:49 GMT
+                    ETag: b488c97f5580c8287393cc4385156776
+                    HTTPStatusCode: 200
+                    VersionId: kfQVb4MMh.tfItn_VyxpON2OVMdaRLKi
+                  error: null
+        '401':
+          $ref: '#/components/responses/ServiceError'
+        '500':
+          description: Internal Server Error
+      tags:
+      - Set Key
+components:
+  schemas:
+    errorMessage:
+      type: object
+      required:
+      - error
+      properties:
+        error:
+          type: string
+          required:
+          - error
+          properties:
+            error:
+              type: string
+              description: Error description
+  responses:
+    ServiceError:
+      description: Service error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/errorMessage'
+  securitySchemes:
+    access-key:
+      type: apiKey
+      in: header
+      name: access_key
+    secret-key:
+      type: apiKey
+      in: header
+      name: secret_key

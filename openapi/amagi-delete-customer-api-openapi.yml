@@ -1,0 +1,106 @@
+openapi: 3.0.0
+info:
+  description: 'The purpose of this application is to provide documentation of the APIs in services-amagi-tv
+
+
+    # Authentication
+
+
+    <!-- ReDoc-Inject: <security-definitions> -->'
+  title: services-amagi-tv Add User Delete Customer API
+  contact:
+    email: suvrojyoti@amagi.com
+  version: null
+servers:
+- url: https://r5i37dwfp8.execute-api.us-east-1.amazonaws.com/dev/
+  description: Development Server
+- url: https://services.amagi.tv
+  description: Production Server
+tags:
+- name: Delete Customer
+paths:
+  /delete-customer:
+    post:
+      security:
+      - access-key: []
+        secret-key: []
+      summary: Deletes a customer, requires admin access_key and secret_key
+      operationId: deleteExistingCustomer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - customer_name
+              properties:
+                user:
+                  type: string
+                  description: Customer Name
+              example:
+                user: CUSTOMER-NAME
+      responses:
+        '200':
+          description: Customer is deleted
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - data
+                properties:
+                  data:
+                    type: string
+                    description: Deleted Customer
+                  error:
+                    type: string
+                    description: User Error
+                example:
+                  data: CUSTOMER-NAME is deleted
+                  error: null
+        '401':
+          $ref: '#/components/responses/ServiceError'
+        '409':
+          $ref: '#/components/responses/UserDoesnotExistError'
+        '500':
+          description: Internal Server Error
+      tags:
+      - Delete Customer
+components:
+  schemas:
+    errorMessage:
+      type: object
+      required:
+      - error
+      properties:
+        error:
+          type: string
+          required:
+          - error
+          properties:
+            error:
+              type: string
+              description: Error description
+  responses:
+    UserDoesnotExistError:
+      description: User doesnot exist
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/errorMessage'
+    ServiceError:
+      description: Service error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/errorMessage'
+  securitySchemes:
+    access-key:
+      type: apiKey
+      in: header
+      name: access_key
+    secret-key:
+      type: apiKey
+      in: header
+      name: secret_key

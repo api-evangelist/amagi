@@ -1,0 +1,23 @@
+generated: '2026-07-17'
+method: searched
+source: https://github.com/amagioss/slv
+note: No first-party CLI exists for the Mapsor / services-amagi-tv APIs. Amagi publishes the SLV (Secure
+  Local Vault) CLI as open source — a secret-management tool, not an API client CLI.
+cli:
+  name: slv
+  repo: https://github.com/amagioss/slv
+  license: MIT
+  install:
+  - curl -sL https://slv.sh/install | bash
+  - go install oss.amagi.com/slv@latest
+  command_groups:
+  - group: profile
+    purpose: Create and manage profiles.
+  - group: env
+    purpose: Create environments and identities.
+  - group: vault
+    purpose: Create vaults and add/retrieve encrypted secrets.
+  - group: secret
+    purpose: Put/get secrets within a vault.
+  - group: k8s
+    purpose: Kubernetes integration for secret injection.
