@@ -10,7 +10,7 @@ info:
   title: services-amagi-tv Add User Get Metrics API
   contact:
     email: suvrojyoti@amagi.com
-  version: null
+  version: "1.0"
 servers:
 - url: https://r5i37dwfp8.execute-api.us-east-1.amazonaws.com/dev/
   description: Development Server
