@@ -331,6 +331,8 @@ apis:
   - type: APIReference
     url: https://docs-callisto.amagi.tv/
 common:
+- type: Overlay
+  url: overlays/amagi-callisto-overlay.yaml
 - type: Website
   url: https://www.amagi.com/
 - type: Documentation
