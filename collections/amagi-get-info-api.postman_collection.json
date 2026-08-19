@@ -1,0 +1,262 @@
+{
+  "item": [
+    {
+      "id": "e3ebc530-3e64-4f53-b541-34bbff937308",
+      "name": "Get Info",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "0d517e04-cd98-4ede-95c5-355e63c6587b",
+          "name": "Returns pubnub info of a ec2 job, requires operator access, this will be Successfull only if the spot request is visible. Ideally this request should come from the spot.",
+          "request": {
+            "name": "Returns pubnub info of a ec2 job, requires operator access, this will be Successfull only if the spot request is visible. Ideally this request should come from the spot.",
+            "description": {},
+            "url": {
+              "path": [
+                "get-info",
+                ":region",
+                ":instance_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "id",
+                  "value": "<string>",
+                  "description": "(Required) Region"
+                },
+                {
+                  "disabled": false,
+                  "key": "id",
+                  "value": "<string>",
+                  "description": "(Required) Instance ID"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "b5f8f308-1828-478a-b91d-103cffb19089",
+              "name": "Pubnub info",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "get-info",
+                    ":region",
+                    ":instance_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"job_id\": \"3892fea6-df92-11e9-9d97-f2a54137d40c\",\n  \"publish_key\": \"pub-c-xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx\",\n  \"subscribe_key\": \"sub-c-xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "325158f8-17d4-4719-8c06-5dd1609a0630",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "get-info",
+                    ":region",
+                    ":instance_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"status\": 4611,\n    \"message\": \"string\",\n    \"code\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a8416e20-dab3-4d6a-9f04-d80c2ba38f27",
+              "name": "Token key is missing or invalid",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "get-info",
+                    ":region",
+                    ":instance_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "WWW_Authenticate",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"status\": 4611,\n    \"message\": \"string\",\n    \"code\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1aa6d93f-e2ad-4520-9344-d72a37fd7a70",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "get-info",
+                    ":region",
+                    ":instance_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://r5i37dwfp8.execute-api.us-east-1.amazonaws.com/dev/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "16371da5-8682-457a-8935-837d343c8535",
+    "name": "services-amagi-tv Add User Get Info API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The purpose of this application is to provide documentation of the APIs in services-amagi-tv\n\n# Authentication\n\n<!-- ReDoc-Inject: <security-definitions> -->\n\nContact Support:\n Email: suvrojyoti@amagi.com",
+      "type": "text/plain"
+    }
+  }
+}

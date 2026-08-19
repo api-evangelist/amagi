@@ -1,0 +1,37 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "services-amagi-tv Add User Destroy API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Destroy",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Terminates instance of a ec2 job, requires operator access, this will be Successfull only if the spot request is visible. Ideally this request should come from the spot.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://r5i37dwfp8.execute-api.us-east-1.amazonaws.com/dev/destroy/:region/:instance_id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "query",
+                "description": "Region"
+              }
+            ]
+          },
+          "docs": "Terminates instance of a ec2 job, requires operator access, this will be Successfull only if the spot request is visible. Ideally this request should come from the spot."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,61 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "services-amagi-tv Add User Get Metrics API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Get Metrics",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Returns list of jobs, requires admin access",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://r5i37dwfp8.execute-api.us-east-1.amazonaws.com/dev/get-metrics",
+            "params": [
+              {
+                "name": "start_date",
+                "value": "",
+                "type": "query",
+                "description": "Time in epoch milliseconds FROM where to filter"
+              },
+              {
+                "name": "end_date",
+                "value": "",
+                "type": "query",
+                "description": "Time in epoch milliseconds UPTO where to filter"
+              },
+              {
+                "name": "cloud_provider",
+                "value": "",
+                "type": "query",
+                "description": "Cloud Provider"
+              },
+              {
+                "name": "region",
+                "value": "",
+                "type": "query",
+                "description": "Region name of deployment as per cloud provider"
+              },
+              {
+                "name": "price",
+                "value": "",
+                "type": "query",
+                "description": "Total price to be charged. If given, the API returns cost per customer"
+              }
+            ]
+          },
+          "docs": "Returns list of jobs, requires admin access"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

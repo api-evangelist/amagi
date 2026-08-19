@@ -1,0 +1,37 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "services-amagi-tv Add User Status API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Status",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Gets status of a submitted job, requires operator access",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://r5i37dwfp8.execute-api.us-east-1.amazonaws.com/dev/status/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Job ID"
+              }
+            ]
+          },
+          "docs": "Gets status of a submitted job, requires operator access"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

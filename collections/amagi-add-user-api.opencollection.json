@@ -1,0 +1,41 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "services-amagi-tv Add User API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Add User",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Adds a new user, requires admin's auth token",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://r5i37dwfp8.execute-api.us-east-1.amazonaws.com/dev/add-user",
+            "params": [
+              {
+                "name": "role",
+                "value": "",
+                "type": "query",
+                "description": "role of the user, default role is operator"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Adds a new user, requires admin's auth token"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

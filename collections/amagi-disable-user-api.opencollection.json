@@ -1,0 +1,33 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "services-amagi-tv Add User Disable User API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Disable User",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "disables user, requires admin's auth token",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://r5i37dwfp8.execute-api.us-east-1.amazonaws.com/dev/disable-user",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "disables user, requires admin's auth token"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

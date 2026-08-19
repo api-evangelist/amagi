@@ -1,0 +1,39 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "services-amagi-tv Add User Set Key API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Set Key",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Sets key with provided value, requires user access_key and secret_key",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://r5i37dwfp8.execute-api.us-east-1.amazonaws.com/dev/set-key",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "access_key",
+              "value": "{{access_key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Sets key with provided value, requires user access_key and secret_key"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,39 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "services-amagi-tv Add User Create Customer API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Create Customer",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Creates a new customer, requires admin access_key and secret_key",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://r5i37dwfp8.execute-api.us-east-1.amazonaws.com/dev/create-customer",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "access_key",
+              "value": "{{access_key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Creates a new customer, requires admin access_key and secret_key"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

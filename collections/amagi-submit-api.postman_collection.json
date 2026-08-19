@@ -1,0 +1,248 @@
+{
+  "item": [
+    {
+      "id": "8ae1f96f-9fe8-4052-8927-e1915f8ec862",
+      "name": "Submit",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "284a8bff-5f91-433e-9264-40e35211933d",
+          "name": "Schedules a container job, requires operator's access",
+          "request": {
+            "name": "Schedules a container job, requires operator's access",
+            "description": {},
+            "url": {
+              "path": [
+                "submit"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"cloud\": \"<string>\",\n  \"region\": \"<string>\",\n  \"id\": \"<string>\",\n  \"customer\": \"<string>\",\n  \"env\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\"\n  },\n  \"tags\": {\n    \"key_0\": true\n  },\n  \"resources\": {\n    \"vcpus\": \"<integer>\",\n    \"memory\": \"<float>\"\n  },\n  \"image\": \"<string>\",\n  \"command\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"ami\": \"<string>\",\n  \"user_data\": \"<string>\",\n  \"priority\": \"<string>\",\n  \"timeout\": \"<integer>\",\n  \"queue\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "378ac224-9cf1-4971-a2d5-61f78dcb8a5b",
+              "name": "queued container job",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "submit"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"cloud\": \"aws\",\n  \"region\": \"us-east-1\",\n  \"env\": {\n    \"asset_id\": \"23\",\n    \"host\": \"example.com\"\n  },\n  \"id\": \"Transcode_23\",\n  \"customer\": \"lightning\",\n  \"tags\": {\n    \"channel_code\": \"RIALT_203\"\n  },\n  \"resources\": {\n    \"vcpus\": 1,\n    \"memory\": 0.5\n  },\n  \"image/ami\": \"hello-world:linux\",\n  \"command/user_data\": \"[]/<some_user_data>\",\n  \"priority/queue\": \"HIGH/<queue_name>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"job_id\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6b3465a0-0f82-4da7-8736-fcda4ab7f330",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "submit"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"cloud\": \"aws\",\n  \"region\": \"us-east-1\",\n  \"env\": {\n    \"asset_id\": \"23\",\n    \"host\": \"example.com\"\n  },\n  \"id\": \"Transcode_23\",\n  \"customer\": \"lightning\",\n  \"tags\": {\n    \"channel_code\": \"RIALT_203\"\n  },\n  \"resources\": {\n    \"vcpus\": 1,\n    \"memory\": 0.5\n  },\n  \"image/ami\": \"hello-world:linux\",\n  \"command/user_data\": \"[]/<some_user_data>\",\n  \"priority/queue\": \"HIGH/<queue_name>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"status\": 6931,\n    \"message\": \"string\",\n    \"code\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7600bd21-e710-4281-b313-a0fa30194a8e",
+              "name": "Token key is missing or invalid",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "submit"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"cloud\": \"aws\",\n  \"region\": \"us-east-1\",\n  \"env\": {\n    \"asset_id\": \"23\",\n    \"host\": \"example.com\"\n  },\n  \"id\": \"Transcode_23\",\n  \"customer\": \"lightning\",\n  \"tags\": {\n    \"channel_code\": \"RIALT_203\"\n  },\n  \"resources\": {\n    \"vcpus\": 1,\n    \"memory\": 0.5\n  },\n  \"image/ami\": \"hello-world:linux\",\n  \"command/user_data\": \"[]/<some_user_data>\",\n  \"priority/queue\": \"HIGH/<queue_name>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "WWW_Authenticate",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"status\": 6931,\n    \"message\": \"string\",\n    \"code\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "153bb09f-ba0d-47dd-b62a-498c93712ce9",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "submit"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"cloud\": \"aws\",\n  \"region\": \"us-east-1\",\n  \"env\": {\n    \"asset_id\": \"23\",\n    \"host\": \"example.com\"\n  },\n  \"id\": \"Transcode_23\",\n  \"customer\": \"lightning\",\n  \"tags\": {\n    \"channel_code\": \"RIALT_203\"\n  },\n  \"resources\": {\n    \"vcpus\": 1,\n    \"memory\": 0.5\n  },\n  \"image/ami\": \"hello-world:linux\",\n  \"command/user_data\": \"[]/<some_user_data>\",\n  \"priority/queue\": \"HIGH/<queue_name>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://r5i37dwfp8.execute-api.us-east-1.amazonaws.com/dev/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "9f7b4e95-e062-4166-9270-a96df58c0f97",
+    "name": "services-amagi-tv Add User Submit API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The purpose of this application is to provide documentation of the APIs in services-amagi-tv\n\n# Authentication\n\n<!-- ReDoc-Inject: <security-definitions> -->\n\nContact Support:\n Email: suvrojyoti@amagi.com",
+      "type": "text/plain"
+    }
+  }
+}

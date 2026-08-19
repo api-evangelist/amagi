@@ -1,0 +1,67 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "services-amagi-tv Add User List API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "List",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Returns list of jobs, requires monitor/operator access",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://r5i37dwfp8.execute-api.us-east-1.amazonaws.com/dev/list",
+            "params": [
+              {
+                "name": "customer",
+                "value": "",
+                "type": "query",
+                "description": "Customer Name"
+              },
+              {
+                "name": "start_time",
+                "value": "",
+                "type": "query",
+                "description": "Job Submission time in epoch milliseconds FROM where to filter"
+              },
+              {
+                "name": "end_time",
+                "value": "",
+                "type": "query",
+                "description": "Job Submission time in epoch milliseconds UPTO where to filter"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "query",
+                "description": "Submitter Job Classification Identifier"
+              },
+              {
+                "name": "cloud",
+                "value": "",
+                "type": "query",
+                "description": "Cloud Provider"
+              },
+              {
+                "name": "region",
+                "value": "",
+                "type": "query",
+                "description": "Region name of deployment as per cloud provider"
+              }
+            ]
+          },
+          "docs": "Returns list of jobs, requires monitor/operator access"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

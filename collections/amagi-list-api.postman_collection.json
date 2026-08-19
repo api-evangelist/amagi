@@ -1,0 +1,280 @@
+{
+  "item": [
+    {
+      "id": "806f7692-dc08-4b34-a8a9-8ea0d7221cc3",
+      "name": "List",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "6de32a52-794e-459f-9475-9663df3856e9",
+          "name": "Returns list of jobs, requires monitor/operator access",
+          "request": {
+            "name": "Returns list of jobs, requires monitor/operator access",
+            "description": {},
+            "url": {
+              "path": [
+                "list"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "customer",
+                  "value": "<string>",
+                  "description": "(Required) Customer Name"
+                },
+                {
+                  "disabled": false,
+                  "key": "start_time",
+                  "value": "<number>",
+                  "description": "(Required) Job Submission time in epoch milliseconds FROM where to filter"
+                },
+                {
+                  "disabled": false,
+                  "key": "end_time",
+                  "value": "<number>",
+                  "description": "(Required) Job Submission time in epoch milliseconds UPTO where to filter"
+                },
+                {
+                  "disabled": false,
+                  "key": "id",
+                  "value": "<string>",
+                  "description": "Submitter Job Classification Identifier"
+                },
+                {
+                  "disabled": false,
+                  "key": "cloud",
+                  "value": "<string>",
+                  "description": "Cloud Provider"
+                },
+                {
+                  "disabled": false,
+                  "key": "region",
+                  "value": "<string>",
+                  "description": "Region name of deployment as per cloud provider"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "2ce8f4b9-d490-4856-a156-48f8abf3960a",
+              "name": "Retuns list of jobs",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "list"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "customer",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "start_time",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "end_time",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "cloud",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "region",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"response\": [\n    {\n      \"resources\": {\n        \"vcpus\": 810,\n        \"memory\": 3107.7965942832375\n      },\n      \"image\": \"string\",\n      \"status\": \"SUCCEEDED\",\n      \"command\": [\n        \"string\",\n        \"string\"\n      ],\n      \"env\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\"\n      },\n      \"tags\": {\n        \"key_0\": \"string\",\n        \"key_1\": true\n      },\n      \"submitted_at\": 5390,\n      \"priority\": \"LOW\",\n      \"cloud_provider\": \"<string>\",\n      \"region\": \"string\",\n      \"id\": \"string\",\n      \"started_at\": 5751,\n      \"finished_at\": 904\n    },\n    {\n      \"resources\": {\n        \"vcpus\": 6128,\n        \"memory\": 6890.775122471558\n      },\n      \"image\": \"string\",\n      \"status\": \"FAILED\",\n      \"command\": [\n        \"string\",\n        \"string\"\n      ],\n      \"env\": {\n        \"key_0\": \"string\"\n      },\n      \"tags\": {\n        \"key_0\": 2374,\n        \"key_1\": 9860\n      },\n      \"submitted_at\": 4500,\n      \"priority\": \"LOW\",\n      \"cloud_provider\": \"<string>\",\n      \"region\": \"string\",\n      \"id\": \"string\",\n      \"started_at\": 4220,\n      \"finished_at\": 6646\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "95923897-8b00-4ae2-a776-7434fb8cd721",
+              "name": "Token key is missing or invalid",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "list"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "customer",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "start_time",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "end_time",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "cloud",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "region",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "WWW_Authenticate",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"status\": 812,\n    \"message\": \"string\",\n    \"code\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ab104e4d-0ee4-4685-85be-09a177cbe72f",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "list"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "customer",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "start_time",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "end_time",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "cloud",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "region",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://r5i37dwfp8.execute-api.us-east-1.amazonaws.com/dev/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "30878b21-4935-4954-b1aa-ae93bd9d154f",
+    "name": "services-amagi-tv Add User List API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The purpose of this application is to provide documentation of the APIs in services-amagi-tv\n\n# Authentication\n\n<!-- ReDoc-Inject: <security-definitions> -->\n\nContact Support:\n Email: suvrojyoti@amagi.com",
+      "type": "text/plain"
+    }
+  }
+}

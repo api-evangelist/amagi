@@ -1,0 +1,33 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "services-amagi-tv Add User Regenerate Token API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Regenerate Token",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Regenerates auth token for an existing user, requires admin's auth token",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://r5i37dwfp8.execute-api.us-east-1.amazonaws.com/dev/regenerate-token",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Regenerates auth token for an existing user, requires admin's auth token"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

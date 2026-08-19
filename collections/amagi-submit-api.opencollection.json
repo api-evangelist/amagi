@@ -1,0 +1,33 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "services-amagi-tv Add User Submit API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Submit",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Schedules a container job, requires operator's access",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://r5i37dwfp8.execute-api.us-east-1.amazonaws.com/dev/submit",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Schedules a container job, requires operator's access"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

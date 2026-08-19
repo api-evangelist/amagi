@@ -43,3 +43,9 @@ tools:
 - name: callisto_list_versions
   description: List key versions
   source_operation: openapi/amagi-callisto-openapi.yml#listVersions
+deployment:
+  mode: none
+  verified: derived
+  tools: 12
+  checked: '2026-08-12'
+  source: catalog MCP census
