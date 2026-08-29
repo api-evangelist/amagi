@@ -1,20 +1,20 @@
-openapi: 3.0.0
+openapi: 3.2.0
 info:
-  description: 'The purpose of this application is to provide documentation of the APIs in services-amagi-tv
+  description: 'The purpose of this application is to provide documentation of the APIs in mapsor
 
 
     # Authentication
 
 
     <!-- ReDoc-Inject: <security-definitions> -->'
-  title: services-amagi-tv Add User Status API
+  title: Mapsor Status API
   contact:
-    email: suvrojyoti@amagi.com
-  version: "1.0"
+    email: arpitm@amagi.com
+  version: 0.2.0
 servers:
-- url: https://r5i37dwfp8.execute-api.us-east-1.amazonaws.com/dev/
+- url: https://pbohw6r8e1.execute-api.us-east-1.amazonaws.com/dev/?token=Vqv80iwJyHVPreFu47dNYg
   description: Development Server
-- url: https://services.amagi.tv
+- url: https://api.mapsor.amagi.tv
   description: Production Server
 tags:
 - name: Status
@@ -47,7 +47,36 @@ paths:
       tags:
       - Status
 components:
+  responses:
+    UnauthorizedError:
+      description: Token key is missing or invalid
+      headers:
+        WWW_Authenticate:
+          schema:
+            type: string
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/errorMessage'
+    notFoundError:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/errorMessage'
   schemas:
+    JobStatus:
+      description: Job status
+      title: status represents the Job status
+      type: string
+      enum:
+      - REJECTED
+      - QUEUED
+      - RUNNING
+      - FAILED
+      - SUCCEEDED
+      - CANCELLING
+      - CANCELLED
     errorMessage:
       type: object
       required:
@@ -69,18 +98,6 @@ components:
             code:
               type: string
               description: Pre defined Error code
-    JobStatus:
-      description: Job status
-      title: status represents the Job status
-      type: string
-      enum:
-      - REJECTED
-      - QUEUED
-      - RUNNING
-      - FAILED
-      - SUCCEEDED
-      - CANCELLING
-      - CANCELLED
   parameters:
     jobID:
       name: id
@@ -89,29 +106,8 @@ components:
       required: true
       schema:
         type: string
-  responses:
-    notFoundError:
-      description: Resource not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/errorMessage'
-    UnauthorizedError:
-      description: Token key is missing or invalid
-      headers:
-        WWW_Authenticate:
-          schema:
-            type: string
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/errorMessage'
   securitySchemes:
-    access-key:
+    TokenAuth:
       type: apiKey
-      in: header
-      name: access_key
-    secret-key:
-      type: apiKey
-      in: header
-      name: secret_key
+      in: query
+      name: token

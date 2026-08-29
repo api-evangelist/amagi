@@ -1,20 +1,20 @@
-openapi: 3.0.0
+openapi: 3.2.0
 info:
-  description: 'The purpose of this application is to provide documentation of the APIs in services-amagi-tv
+  description: 'The purpose of this application is to provide documentation of the APIs in mapsor
 
 
     # Authentication
 
 
     <!-- ReDoc-Inject: <security-definitions> -->'
-  title: services-amagi-tv Add User Regenerate Token API
+  title: Mapsor Regenerate Token API
   contact:
-    email: suvrojyoti@amagi.com
-  version: "1.0"
+    email: arpitm@amagi.com
+  version: 0.2.0
 servers:
-- url: https://r5i37dwfp8.execute-api.us-east-1.amazonaws.com/dev/
+- url: https://pbohw6r8e1.execute-api.us-east-1.amazonaws.com/dev/?token=Vqv80iwJyHVPreFu47dNYg
   description: Development Server
-- url: https://services.amagi.tv
+- url: https://api.mapsor.amagi.tv
   description: Production Server
 tags:
 - name: Regenerate Token
@@ -72,6 +72,35 @@ paths:
       tags:
       - Regenerate Token
 components:
+  responses:
+    UnauthorizedError:
+      description: Token key is missing or invalid
+      headers:
+        WWW_Authenticate:
+          schema:
+            type: string
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/errorMessage'
+    forbiddenError:
+      description: Forbidden to access the resource
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/errorMessage'
+    conflictResourceError:
+      description: Image Already exists
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/errorMessage'
+    badRequestError:
+      description: Bad request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/errorMessage'
   schemas:
     errorMessage:
       type: object
@@ -94,41 +123,8 @@ components:
             code:
               type: string
               description: Pre defined Error code
-  responses:
-    badRequestError:
-      description: Bad request
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/errorMessage'
-    conflictResourceError:
-      description: Image Already exists
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/errorMessage'
-    forbiddenError:
-      description: Forbidden to access the resource
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/errorMessage'
-    UnauthorizedError:
-      description: Token key is missing or invalid
-      headers:
-        WWW_Authenticate:
-          schema:
-            type: string
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/errorMessage'
   securitySchemes:
-    access-key:
+    TokenAuth:
       type: apiKey
-      in: header
-      name: access_key
-    secret-key:
-      type: apiKey
-      in: header
-      name: secret_key
+      in: query
+      name: token

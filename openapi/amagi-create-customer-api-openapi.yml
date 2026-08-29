@@ -1,4 +1,4 @@
-openapi: 3.0.0
+openapi: 3.2.0
 info:
   description: 'The purpose of this application is to provide documentation of the APIs in services-amagi-tv
 
@@ -7,10 +7,10 @@ info:
 
 
     <!-- ReDoc-Inject: <security-definitions> -->'
-  title: services-amagi-tv Add User Create Customer API
+  title: services-amagi-tv Create Customer API
   contact:
     email: suvrojyoti@amagi.com
-  version: "1.0"
+  version: null
 servers:
 - url: https://r5i37dwfp8.execute-api.us-east-1.amazonaws.com/dev/
   description: Development Server
@@ -90,14 +90,14 @@ components:
               type: string
               description: Error description
   responses:
-    ServiceError:
-      description: Service error
+    UserAlreadyExistsError:
+      description: User Already exists
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/errorMessage'
-    UserAlreadyExistsError:
-      description: User Already exists
+    ServiceError:
+      description: Service error
       content:
         application/json:
           schema:
