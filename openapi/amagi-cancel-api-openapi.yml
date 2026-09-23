@@ -6,7 +6,7 @@ info:
     # Authentication
 
 
-    <!-- ReDoc-Inject: <security-definitions> -->'
+    -->'
   title: Mapsor Cancel API
   contact:
     email: arpitm@amagi.com
@@ -49,6 +49,8 @@ paths:
           description: Internal Server Error
       tags:
       - Cancel
+      operationId: getCancelById
+      x-operation-id-source: derived
 components:
   responses:
     UnauthorizedError:

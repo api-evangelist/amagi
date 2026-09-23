@@ -6,7 +6,7 @@ info:
     # Authentication
 
 
-    <!-- ReDoc-Inject: <security-definitions> -->'
+    -->'
   title: Mapsor Destroy API
   contact:
     email: arpitm@amagi.com
@@ -23,7 +23,7 @@ paths:
     get:
       security:
       - TokenAuth: []
-      summary: Terminates instance of a ec2 job, requires operator access, this will be Successfull only if the spot request is visible. Ideally this request should come from the spot.
+      summary: Terminates instance of a ec2 job, requires operator access, this will be…
       parameters:
       - $ref: '#/components/parameters/region'
       - $ref: '#/components/parameters/instance_id'
@@ -50,6 +50,8 @@ paths:
           description: Internal Server Error
       tags:
       - Destroy
+      operationId: getDestroyByRegionByInstanceId
+      x-operation-id-source: derived
 components:
   responses:
     UnauthorizedError:
@@ -68,6 +70,21 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/errorMessage'
+  parameters:
+    instance_id:
+      name: id
+      in: query
+      description: Instance ID
+      required: true
+      schema:
+        type: string
+    region:
+      name: id
+      in: query
+      description: Region
+      required: true
+      schema:
+        type: string
   schemas:
     errorMessage:
       type: object
@@ -90,21 +107,6 @@ components:
             code:
               type: string
               description: Pre defined Error code
-  parameters:
-    instance_id:
-      name: id
-      in: query
-      description: Instance ID
-      required: true
-      schema:
-        type: string
-    region:
-      name: id
-      in: query
-      description: Region
-      required: true
-      schema:
-        type: string
   securitySchemes:
     TokenAuth:
       type: apiKey

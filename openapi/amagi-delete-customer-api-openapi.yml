@@ -6,7 +6,7 @@ info:
     # Authentication
 
 
-    <!-- ReDoc-Inject: <security-definitions> -->'
+    -->'
   title: services-amagi-tv Delete Customer API
   contact:
     email: suvrojyoti@amagi.com

@@ -6,7 +6,7 @@ info:
     # Authentication
 
 
-    <!-- ReDoc-Inject: <security-definitions> -->'
+    -->'
   title: Mapsor Logs API
   contact:
     email: arpitm@amagi.com
@@ -43,6 +43,8 @@ paths:
           description: Internal Server Error
       tags:
       - Logs
+      operationId: getLogsById
+      x-operation-id-source: derived
 components:
   responses:
     UnauthorizedError:

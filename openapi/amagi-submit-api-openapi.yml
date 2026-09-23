@@ -6,7 +6,7 @@ info:
     # Authentication
 
 
-    <!-- ReDoc-Inject: <security-definitions> -->'
+    -->'
   title: Mapsor Submit API
   contact:
     email: arpitm@amagi.com
@@ -101,36 +101,6 @@ paths:
       - Submit
 components:
   schemas:
-    timeout:
-      title: timeout for a job's execution
-      type: integer
-      description: Job timeout
-    resources:
-      description: Compute resources
-      title: resources represents the compute resources required to run the job
-      type: object
-      properties:
-        vcpus:
-          type: integer
-          description: vcpus required to run the job
-        memory:
-          type: number
-          format: float
-          description: Memory in GB required to run the job
-    newJob:
-      description: Provides job id for a new job request submitted
-      title: newJob represents the response of new job id submitted
-      type: object
-      required:
-      - job_id
-      properties:
-        job_id:
-          type: string
-          description: Job ID
-    ami:
-      title: AMI which needs to be used for EC2 job submission
-      type: string
-      description: AMI
     Priority:
       description: Job priority
       title: priority represents the Job priority
@@ -144,10 +114,21 @@ components:
       type: array
       items:
         type: string
-    queue:
-      title: Batch queue which needs to be used for Batch job submission
+    timeout:
+      title: timeout for a job's execution
+      type: integer
+      description: Job timeout
+    region:
       type: string
-      description: Job Queue
+      description: Cloud Provider region where the job was scheduled
+      title: region represents the region where the job was scheduled
+    cloudProvider:
+      description: Cloud provider
+      title: cloud_provider represents the list of all cloud providers supported
+      type: string
+      enum:
+      - aws
+      - azure
     errorMessage:
       type: object
       required:
@@ -169,40 +150,59 @@ components:
             code:
               type: string
               description: Pre defined Error code
-    cloudProvider:
-      description: Cloud provider
-      title: cloud_provider represents the list of all cloud providers supported
+    customer:
+      description: Customer
+      title: customer for which the job is run
       type: string
-      enum:
-      - aws
-      - azure
-    user_data:
-      title: user data which needs to be passed for EC2 job submission
-      type: string
-      description: User Data
     dockerImage:
       title: dockerImage represents the docker image url
       type: string
       description: Docker image url
+    ami:
+      title: AMI which needs to be used for EC2 job submission
+      type: string
+      description: AMI
     env:
       type: object
       additionalProperties:
         type: string
       description: Key pair values of environment variables
       title: env represents the environment variables passed to the container
-    customer:
-      description: Customer
-      title: customer for which the job is run
-      type: string
     tags:
       type: object
       additionalProperties: true
       description: Customer submitter tags
       title: tags represents the custom tags used to tag the job
-    region:
+    user_data:
+      title: user data which needs to be passed for EC2 job submission
       type: string
-      description: Cloud Provider region where the job was scheduled
-      title: region represents the region where the job was scheduled
+      description: User Data
+    resources:
+      description: Compute resources
+      title: resources represents the compute resources required to run the job
+      type: object
+      properties:
+        vcpus:
+          type: integer
+          description: vcpus required to run the job
+        memory:
+          type: number
+          format: float
+          description: Memory in GB required to run the job
+    queue:
+      title: Batch queue which needs to be used for Batch job submission
+      type: string
+      description: Job Queue
+    newJob:
+      description: Provides job id for a new job request submitted
+      title: newJob represents the response of new job id submitted
+      type: object
+      required:
+      - job_id
+      properties:
+        job_id:
+          type: string
+          description: Job ID
   responses:
     UnauthorizedError:
       description: Token key is missing or invalid

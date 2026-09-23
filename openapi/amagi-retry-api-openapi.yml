@@ -6,7 +6,7 @@ info:
     # Authentication
 
 
-    <!-- ReDoc-Inject: <security-definitions> -->'
+    -->'
   title: Mapsor Retry API
   contact:
     email: arpitm@amagi.com
@@ -43,39 +43,9 @@ paths:
           description: Internal Server Error
       tags:
       - Retry
+      operationId: getRetryById
+      x-operation-id-source: derived
 components:
-  schemas:
-    newJob:
-      description: Provides job id for a new job request submitted
-      title: newJob represents the response of new job id submitted
-      type: object
-      required:
-      - job_id
-      properties:
-        job_id:
-          type: string
-          description: Job ID
-    errorMessage:
-      type: object
-      required:
-      - error
-      properties:
-        error:
-          type: object
-          required:
-          - status
-          - message
-          - code
-          properties:
-            status:
-              type: integer
-              description: HTTP Status Code
-            message:
-              type: string
-              description: Error description
-            code:
-              type: string
-              description: Pre defined Error code
   responses:
     UnauthorizedError:
       description: Token key is missing or invalid
@@ -107,6 +77,38 @@ components:
       required: true
       schema:
         type: string
+  schemas:
+    errorMessage:
+      type: object
+      required:
+      - error
+      properties:
+        error:
+          type: object
+          required:
+          - status
+          - message
+          - code
+          properties:
+            status:
+              type: integer
+              description: HTTP Status Code
+            message:
+              type: string
+              description: Error description
+            code:
+              type: string
+              description: Pre defined Error code
+    newJob:
+      description: Provides job id for a new job request submitted
+      title: newJob represents the response of new job id submitted
+      type: object
+      required:
+      - job_id
+      properties:
+        job_id:
+          type: string
+          description: Job ID
   securitySchemes:
     TokenAuth:
       type: apiKey

@@ -6,7 +6,7 @@ info:
     # Authentication
 
 
-    <!-- ReDoc-Inject: <security-definitions> -->'
+    -->'
   title: Mapsor List API
   contact:
     email: arpitm@amagi.com
@@ -121,33 +121,10 @@ paths:
           description: Internal Server Error
       tags:
       - List
+      operationId: getList
+      x-operation-id-source: derived
 components:
   schemas:
-    resources:
-      description: Compute resources
-      title: resources represents the compute resources required to run the job
-      type: object
-      properties:
-        vcpus:
-          type: integer
-          description: vcpus required to run the job
-        memory:
-          type: number
-          format: float
-          description: Memory in GB required to run the job
-    Priority:
-      description: Job priority
-      title: priority represents the Job priority
-      type: string
-      enum:
-      - HIGH
-      - LOW
-    command:
-      description: Docker arguments
-      title: command represents the docker arguments passed to the container
-      type: array
-      items:
-        type: string
     JobStatus:
       description: Job status
       title: status represents the Job status
@@ -160,10 +137,38 @@ components:
       - SUCCEEDED
       - CANCELLING
       - CANCELLED
+    Priority:
+      description: Job priority
+      title: priority represents the Job priority
+      type: string
+      enum:
+      - HIGH
+      - LOW
     jobID:
       title: jobID represents the jobID of the submitted job
       type: string
       description: Job ID
+    command:
+      description: Docker arguments
+      title: command represents the docker arguments passed to the container
+      type: array
+      items:
+        type: string
+    cloudProvider:
+      description: Cloud provider
+      title: cloud_provider represents the list of all cloud providers supported
+      type: string
+      enum:
+      - aws
+      - azure
+    region:
+      type: string
+      description: Cloud Provider region where the job was scheduled
+      title: region represents the region where the job was scheduled
+    dockerImage:
+      title: dockerImage represents the docker image url
+      type: string
+      description: Docker image url
     errorMessage:
       type: object
       required:
@@ -185,17 +190,6 @@ components:
             code:
               type: string
               description: Pre defined Error code
-    cloudProvider:
-      description: Cloud provider
-      title: cloud_provider represents the list of all cloud providers supported
-      type: string
-      enum:
-      - aws
-      - azure
-    dockerImage:
-      title: dockerImage represents the docker image url
-      type: string
-      description: Docker image url
     env:
       type: object
       additionalProperties:
@@ -207,10 +201,18 @@ components:
       additionalProperties: true
       description: Customer submitter tags
       title: tags represents the custom tags used to tag the job
-    region:
-      type: string
-      description: Cloud Provider region where the job was scheduled
-      title: region represents the region where the job was scheduled
+    resources:
+      description: Compute resources
+      title: resources represents the compute resources required to run the job
+      type: object
+      properties:
+        vcpus:
+          type: integer
+          description: vcpus required to run the job
+        memory:
+          type: number
+          format: float
+          description: Memory in GB required to run the job
   responses:
     UnauthorizedError:
       description: Token key is missing or invalid

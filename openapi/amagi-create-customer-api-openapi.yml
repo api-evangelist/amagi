@@ -6,7 +6,7 @@ info:
     # Authentication
 
 
-    <!-- ReDoc-Inject: <security-definitions> -->'
+    -->'
   title: services-amagi-tv Create Customer API
   contact:
     email: suvrojyoti@amagi.com
@@ -75,6 +75,19 @@ paths:
       tags:
       - Create Customer
 components:
+  responses:
+    UserAlreadyExistsError:
+      description: User Already exists
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/errorMessage'
+    ServiceError:
+      description: Service error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/errorMessage'
   schemas:
     errorMessage:
       type: object
@@ -89,19 +102,6 @@ components:
             error:
               type: string
               description: Error description
-  responses:
-    UserAlreadyExistsError:
-      description: User Already exists
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/errorMessage'
-    ServiceError:
-      description: Service error
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/errorMessage'
   securitySchemes:
     access-key:
       type: apiKey

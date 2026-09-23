@@ -6,7 +6,7 @@ info:
     # Authentication
 
 
-    <!-- ReDoc-Inject: <security-definitions> -->'
+    -->'
   title: Mapsor Get Metrics API
   contact:
     email: arpitm@amagi.com
@@ -77,14 +77,10 @@ paths:
           description: Internal Server Error
       tags:
       - Get Metrics
+      operationId: getGetMetrics
+      x-operation-id-source: derived
 components:
   responses:
-    badRequestError:
-      description: Bad request
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/errorMessage'
     UnauthorizedError:
       description: Token key is missing or invalid
       headers:
@@ -95,7 +91,20 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/errorMessage'
+    badRequestError:
+      description: Bad request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/errorMessage'
   schemas:
+    cloudProvider:
+      description: Cloud provider
+      title: cloud_provider represents the list of all cloud providers supported
+      type: string
+      enum:
+      - aws
+      - azure
     errorMessage:
       type: object
       required:
@@ -117,13 +126,6 @@ components:
             code:
               type: string
               description: Pre defined Error code
-    cloudProvider:
-      description: Cloud provider
-      title: cloud_provider represents the list of all cloud providers supported
-      type: string
-      enum:
-      - aws
-      - azure
   securitySchemes:
     TokenAuth:
       type: apiKey

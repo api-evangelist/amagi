@@ -6,7 +6,7 @@ info:
     # Authentication
 
 
-    <!-- ReDoc-Inject: <security-definitions> -->'
+    -->'
   title: services-amagi-tv Get Key API
   contact:
     email: suvrojyoti@amagi.com

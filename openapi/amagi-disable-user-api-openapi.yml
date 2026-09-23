@@ -6,7 +6,7 @@ info:
     # Authentication
 
 
-    <!-- ReDoc-Inject: <security-definitions> -->'
+    -->'
   title: Mapsor Disable User API
   contact:
     email: arpitm@amagi.com
@@ -62,6 +62,12 @@ paths:
       - Disable User
 components:
   responses:
+    conflictResourceError:
+      description: Image Already exists
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/errorMessage'
     UnauthorizedError:
       description: Token key is missing or invalid
       headers:
@@ -72,20 +78,14 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/errorMessage'
-    forbiddenError:
-      description: Forbidden to access the resource
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/errorMessage'
-    conflictResourceError:
-      description: Image Already exists
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/errorMessage'
     badRequestError:
       description: Bad request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/errorMessage'
+    forbiddenError:
+      description: Forbidden to access the resource
       content:
         application/json:
           schema:

@@ -74,7 +74,8 @@
     "amagi-mapsor-openapi.yml: declared missing tag: Regenerate Token",
     "amagi-mapsor-openapi.yml: declared missing tag: Retry",
     "amagi-mapsor-openapi.yml: declared missing tag: Status",
-    "amagi-mapsor-openapi.yml: declared missing tag: Submit"
+    "amagi-mapsor-openapi.yml: declared missing tag: Submit",
+    "apis.yml register: already-registered"
   ],
   "skipped": [
     "amagi-add-user-api-openapi.yml: previously refined output, superseded by openapi/_original/",
