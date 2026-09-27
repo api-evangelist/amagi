@@ -98,13 +98,6 @@ components:
           schema:
             $ref: '#/components/schemas/errorMessage'
   schemas:
-    cloudProvider:
-      description: Cloud provider
-      title: cloud_provider represents the list of all cloud providers supported
-      type: string
-      enum:
-      - aws
-      - azure
     errorMessage:
       type: object
       required:
@@ -126,6 +119,13 @@ components:
             code:
               type: string
               description: Pre defined Error code
+    cloudProvider:
+      description: Cloud provider
+      title: cloud_provider represents the list of all cloud providers supported
+      type: string
+      enum:
+      - aws
+      - azure
   securitySchemes:
     TokenAuth:
       type: apiKey

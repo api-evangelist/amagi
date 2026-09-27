@@ -101,34 +101,6 @@ paths:
       - Submit
 components:
   schemas:
-    Priority:
-      description: Job priority
-      title: priority represents the Job priority
-      type: string
-      enum:
-      - HIGH
-      - LOW
-    command:
-      description: Docker arguments
-      title: command represents the docker arguments passed to the container
-      type: array
-      items:
-        type: string
-    timeout:
-      title: timeout for a job's execution
-      type: integer
-      description: Job timeout
-    region:
-      type: string
-      description: Cloud Provider region where the job was scheduled
-      title: region represents the region where the job was scheduled
-    cloudProvider:
-      description: Cloud provider
-      title: cloud_provider represents the list of all cloud providers supported
-      type: string
-      enum:
-      - aws
-      - azure
     errorMessage:
       type: object
       required:
@@ -150,6 +122,20 @@ components:
             code:
               type: string
               description: Pre defined Error code
+    timeout:
+      title: timeout for a job's execution
+      type: integer
+      description: Job timeout
+    newJob:
+      description: Provides job id for a new job request submitted
+      title: newJob represents the response of new job id submitted
+      type: object
+      required:
+      - job_id
+      properties:
+        job_id:
+          type: string
+          description: Job ID
     customer:
       description: Customer
       title: customer for which the job is run
@@ -158,25 +144,6 @@ components:
       title: dockerImage represents the docker image url
       type: string
       description: Docker image url
-    ami:
-      title: AMI which needs to be used for EC2 job submission
-      type: string
-      description: AMI
-    env:
-      type: object
-      additionalProperties:
-        type: string
-      description: Key pair values of environment variables
-      title: env represents the environment variables passed to the container
-    tags:
-      type: object
-      additionalProperties: true
-      description: Customer submitter tags
-      title: tags represents the custom tags used to tag the job
-    user_data:
-      title: user data which needs to be passed for EC2 job submission
-      type: string
-      description: User Data
     resources:
       description: Compute resources
       title: resources represents the compute resources required to run the job
@@ -189,20 +156,53 @@ components:
           type: number
           format: float
           description: Memory in GB required to run the job
+    Priority:
+      description: Job priority
+      title: priority represents the Job priority
+      type: string
+      enum:
+      - HIGH
+      - LOW
+    user_data:
+      title: user data which needs to be passed for EC2 job submission
+      type: string
+      description: User Data
+    cloudProvider:
+      description: Cloud provider
+      title: cloud_provider represents the list of all cloud providers supported
+      type: string
+      enum:
+      - aws
+      - azure
+    ami:
+      title: AMI which needs to be used for EC2 job submission
+      type: string
+      description: AMI
+    command:
+      description: Docker arguments
+      title: command represents the docker arguments passed to the container
+      type: array
+      items:
+        type: string
     queue:
       title: Batch queue which needs to be used for Batch job submission
       type: string
       description: Job Queue
-    newJob:
-      description: Provides job id for a new job request submitted
-      title: newJob represents the response of new job id submitted
+    region:
+      type: string
+      description: Cloud Provider region where the job was scheduled
+      title: region represents the region where the job was scheduled
+    env:
       type: object
-      required:
-      - job_id
-      properties:
-        job_id:
-          type: string
-          description: Job ID
+      additionalProperties:
+        type: string
+      description: Key pair values of environment variables
+      title: env represents the environment variables passed to the container
+    tags:
+      type: object
+      additionalProperties: true
+      description: Customer submitter tags
+      title: tags represents the custom tags used to tag the job
   responses:
     UnauthorizedError:
       description: Token key is missing or invalid

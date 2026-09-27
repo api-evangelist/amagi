@@ -76,14 +76,14 @@ paths:
       - Create Customer
 components:
   responses:
-    UserAlreadyExistsError:
-      description: User Already exists
+    ServiceError:
+      description: Service error
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/errorMessage'
-    ServiceError:
-      description: Service error
+    UserAlreadyExistsError:
+      description: User Already exists
       content:
         application/json:
           schema:

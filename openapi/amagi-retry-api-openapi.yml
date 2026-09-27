@@ -47,6 +47,12 @@ paths:
       x-operation-id-source: derived
 components:
   responses:
+    notFoundError:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/errorMessage'
     UnauthorizedError:
       description: Token key is missing or invalid
       headers:
@@ -57,27 +63,23 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/errorMessage'
-    notFoundError:
-      description: Resource not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/errorMessage'
     badRequestError:
       description: Bad request
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/errorMessage'
-  parameters:
-    jobID:
-      name: id
-      in: path
-      description: Job ID
-      required: true
-      schema:
-        type: string
   schemas:
+    newJob:
+      description: Provides job id for a new job request submitted
+      title: newJob represents the response of new job id submitted
+      type: object
+      required:
+      - job_id
+      properties:
+        job_id:
+          type: string
+          description: Job ID
     errorMessage:
       type: object
       required:
@@ -99,16 +101,14 @@ components:
             code:
               type: string
               description: Pre defined Error code
-    newJob:
-      description: Provides job id for a new job request submitted
-      title: newJob represents the response of new job id submitted
-      type: object
-      required:
-      - job_id
-      properties:
-        job_id:
-          type: string
-          description: Job ID
+  parameters:
+    jobID:
+      name: id
+      in: path
+      description: Job ID
+      required: true
+      schema:
+        type: string
   securitySchemes:
     TokenAuth:
       type: apiKey
