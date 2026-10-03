@@ -69,14 +69,14 @@ paths:
       - Delete Customer
 components:
   responses:
-    ServiceError:
-      description: Service error
+    UserDoesnotExistError:
+      description: User doesnot exist
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/errorMessage'
-    UserDoesnotExistError:
-      description: User doesnot exist
+    ServiceError:
+      description: Service error
       content:
         application/json:
           schema:

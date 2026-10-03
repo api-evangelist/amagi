@@ -124,7 +124,76 @@ paths:
       operationId: getList
       x-operation-id-source: derived
 components:
+  responses:
+    UnauthorizedError:
+      description: Token key is missing or invalid
+      headers:
+        WWW_Authenticate:
+          schema:
+            type: string
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/errorMessage'
   schemas:
+    resources:
+      description: Compute resources
+      title: resources represents the compute resources required to run the job
+      type: object
+      properties:
+        vcpus:
+          type: integer
+          description: vcpus required to run the job
+        memory:
+          type: number
+          format: float
+          description: Memory in GB required to run the job
+    JobStatus:
+      description: Job status
+      title: status represents the Job status
+      type: string
+      enum:
+      - REJECTED
+      - QUEUED
+      - RUNNING
+      - FAILED
+      - SUCCEEDED
+      - CANCELLING
+      - CANCELLED
+    env:
+      type: object
+      additionalProperties:
+        type: string
+      description: Key pair values of environment variables
+      title: env represents the environment variables passed to the container
+    jobID:
+      title: jobID represents the jobID of the submitted job
+      type: string
+      description: Job ID
+    Priority:
+      description: Job priority
+      title: priority represents the Job priority
+      type: string
+      enum:
+      - HIGH
+      - LOW
+    cloudProvider:
+      description: Cloud provider
+      title: cloud_provider represents the list of all cloud providers supported
+      type: string
+      enum:
+      - aws
+      - azure
+    command:
+      description: Docker arguments
+      title: command represents the docker arguments passed to the container
+      type: array
+      items:
+        type: string
+    region:
+      type: string
+      description: Cloud Provider region where the job was scheduled
+      title: region represents the region where the job was scheduled
     errorMessage:
       type: object
       required:
@@ -146,84 +215,15 @@ components:
             code:
               type: string
               description: Pre defined Error code
-    jobID:
-      title: jobID represents the jobID of the submitted job
-      type: string
-      description: Job ID
-    JobStatus:
-      description: Job status
-      title: status represents the Job status
-      type: string
-      enum:
-      - REJECTED
-      - QUEUED
-      - RUNNING
-      - FAILED
-      - SUCCEEDED
-      - CANCELLING
-      - CANCELLED
-    dockerImage:
-      title: dockerImage represents the docker image url
-      type: string
-      description: Docker image url
-    cloudProvider:
-      description: Cloud provider
-      title: cloud_provider represents the list of all cloud providers supported
-      type: string
-      enum:
-      - aws
-      - azure
-    Priority:
-      description: Job priority
-      title: priority represents the Job priority
-      type: string
-      enum:
-      - HIGH
-      - LOW
-    resources:
-      description: Compute resources
-      title: resources represents the compute resources required to run the job
-      type: object
-      properties:
-        vcpus:
-          type: integer
-          description: vcpus required to run the job
-        memory:
-          type: number
-          format: float
-          description: Memory in GB required to run the job
-    command:
-      description: Docker arguments
-      title: command represents the docker arguments passed to the container
-      type: array
-      items:
-        type: string
-    region:
-      type: string
-      description: Cloud Provider region where the job was scheduled
-      title: region represents the region where the job was scheduled
-    env:
-      type: object
-      additionalProperties:
-        type: string
-      description: Key pair values of environment variables
-      title: env represents the environment variables passed to the container
     tags:
       type: object
       additionalProperties: true
       description: Customer submitter tags
       title: tags represents the custom tags used to tag the job
-  responses:
-    UnauthorizedError:
-      description: Token key is missing or invalid
-      headers:
-        WWW_Authenticate:
-          schema:
-            type: string
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/errorMessage'
+    dockerImage:
+      title: dockerImage represents the docker image url
+      type: string
+      description: Docker image url
   securitySchemes:
     TokenAuth:
       type: apiKey
