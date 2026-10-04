@@ -68,19 +68,6 @@ paths:
       tags:
       - Delete Customer
 components:
-  responses:
-    UserDoesnotExistError:
-      description: User doesnot exist
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/errorMessage'
-    ServiceError:
-      description: Service error
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/errorMessage'
   schemas:
     errorMessage:
       type: object
@@ -95,6 +82,19 @@ components:
             error:
               type: string
               description: Error description
+  responses:
+    UserDoesnotExistError:
+      description: User doesnot exist
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/errorMessage'
+    ServiceError:
+      description: Service error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/errorMessage'
   securitySchemes:
     access-key:
       type: apiKey

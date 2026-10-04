@@ -100,24 +100,44 @@ paths:
       tags:
       - Submit
 components:
-  responses:
-    UnauthorizedError:
-      description: Token key is missing or invalid
-      headers:
-        WWW_Authenticate:
-          schema:
-            type: string
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/errorMessage'
-    badRequestError:
-      description: Bad request
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/errorMessage'
   schemas:
+    newJob:
+      description: Provides job id for a new job request submitted
+      title: newJob represents the response of new job id submitted
+      type: object
+      required:
+      - job_id
+      properties:
+        job_id:
+          type: string
+          description: Job ID
+    tags:
+      type: object
+      additionalProperties: true
+      description: Customer submitter tags
+      title: tags represents the custom tags used to tag the job
+    user_data:
+      title: user data which needs to be passed for EC2 job submission
+      type: string
+      description: User Data
+    queue:
+      title: Batch queue which needs to be used for Batch job submission
+      type: string
+      description: Job Queue
+    timeout:
+      title: timeout for a job's execution
+      type: integer
+      description: Job timeout
+    env:
+      type: object
+      additionalProperties:
+        type: string
+      description: Key pair values of environment variables
+      title: env represents the environment variables passed to the container
+    ami:
+      title: AMI which needs to be used for EC2 job submission
+      type: string
+      description: AMI
     resources:
       description: Compute resources
       title: resources represents the compute resources required to run the job
@@ -130,45 +150,6 @@ components:
           type: number
           format: float
           description: Memory in GB required to run the job
-    newJob:
-      description: Provides job id for a new job request submitted
-      title: newJob represents the response of new job id submitted
-      type: object
-      required:
-      - job_id
-      properties:
-        job_id:
-          type: string
-          description: Job ID
-    queue:
-      title: Batch queue which needs to be used for Batch job submission
-      type: string
-      description: Job Queue
-    env:
-      type: object
-      additionalProperties:
-        type: string
-      description: Key pair values of environment variables
-      title: env represents the environment variables passed to the container
-    timeout:
-      title: timeout for a job's execution
-      type: integer
-      description: Job timeout
-    customer:
-      description: Customer
-      title: customer for which the job is run
-      type: string
-    ami:
-      title: AMI which needs to be used for EC2 job submission
-      type: string
-      description: AMI
-    Priority:
-      description: Job priority
-      title: priority represents the Job priority
-      type: string
-      enum:
-      - HIGH
-      - LOW
     cloudProvider:
       description: Cloud provider
       title: cloud_provider represents the list of all cloud providers supported
@@ -176,16 +157,6 @@ components:
       enum:
       - aws
       - azure
-    command:
-      description: Docker arguments
-      title: command represents the docker arguments passed to the container
-      type: array
-      items:
-        type: string
-    region:
-      type: string
-      description: Cloud Provider region where the job was scheduled
-      title: region represents the region where the job was scheduled
     errorMessage:
       type: object
       required:
@@ -207,19 +178,48 @@ components:
             code:
               type: string
               description: Pre defined Error code
-    tags:
-      type: object
-      additionalProperties: true
-      description: Customer submitter tags
-      title: tags represents the custom tags used to tag the job
+    region:
+      type: string
+      description: Cloud Provider region where the job was scheduled
+      title: region represents the region where the job was scheduled
+    customer:
+      description: Customer
+      title: customer for which the job is run
+      type: string
+    Priority:
+      description: Job priority
+      title: priority represents the Job priority
+      type: string
+      enum:
+      - HIGH
+      - LOW
+    command:
+      description: Docker arguments
+      title: command represents the docker arguments passed to the container
+      type: array
+      items:
+        type: string
     dockerImage:
       title: dockerImage represents the docker image url
       type: string
       description: Docker image url
-    user_data:
-      title: user data which needs to be passed for EC2 job submission
-      type: string
-      description: User Data
+  responses:
+    UnauthorizedError:
+      description: Token key is missing or invalid
+      headers:
+        WWW_Authenticate:
+          schema:
+            type: string
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/errorMessage'
+    badRequestError:
+      description: Bad request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/errorMessage'
   securitySchemes:
     TokenAuth:
       type: apiKey

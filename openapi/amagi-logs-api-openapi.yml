@@ -47,6 +47,12 @@ paths:
       x-operation-id-source: derived
 components:
   responses:
+    notFoundError:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/errorMessage'
     UnauthorizedError:
       description: Token key is missing or invalid
       headers:
@@ -59,12 +65,6 @@ components:
             $ref: '#/components/schemas/errorMessage'
     badRequestError:
       description: Bad request
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/errorMessage'
-    notFoundError:
-      description: Resource not found
       content:
         application/json:
           schema:

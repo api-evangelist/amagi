@@ -46,29 +46,6 @@ paths:
       operationId: getRetryById
       x-operation-id-source: derived
 components:
-  responses:
-    UnauthorizedError:
-      description: Token key is missing or invalid
-      headers:
-        WWW_Authenticate:
-          schema:
-            type: string
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/errorMessage'
-    badRequestError:
-      description: Bad request
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/errorMessage'
-    notFoundError:
-      description: Resource not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/errorMessage'
   schemas:
     newJob:
       description: Provides job id for a new job request submitted
@@ -101,6 +78,29 @@ components:
             code:
               type: string
               description: Pre defined Error code
+  responses:
+    notFoundError:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/errorMessage'
+    UnauthorizedError:
+      description: Token key is missing or invalid
+      headers:
+        WWW_Authenticate:
+          schema:
+            type: string
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/errorMessage'
+    badRequestError:
+      description: Bad request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/errorMessage'
   parameters:
     jobID:
       name: id

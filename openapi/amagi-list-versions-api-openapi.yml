@@ -65,13 +65,6 @@ paths:
       tags:
       - List Versions
 components:
-  responses:
-    ServiceError:
-      description: Service error
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/errorMessage'
   schemas:
     errorMessage:
       type: object
@@ -86,6 +79,13 @@ components:
             error:
               type: string
               description: Error description
+  responses:
+    ServiceError:
+      description: Service error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/errorMessage'
   securitySchemes:
     access-key:
       type: apiKey
