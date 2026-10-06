@@ -44,7 +44,7 @@ x-tier: stub
 x-tier-reason: portfolio-lead
 specificationVersion: '0.23'
 created: '2026-07-17'
-modified: '2026-07-17'
+modified: '2026-10-06'
 tags:
 - Company
 - Media
@@ -343,6 +343,8 @@ apis:
   - type: APIReference
     url: https://docs-callisto.amagi.tv/
 common:
+- url: https://www.amagi.com/blog/rss.xml
+  type: BlogRSS
 - type: Overlay
   url: overlays/amagi-callisto-overlay.yaml
 - type: Website
