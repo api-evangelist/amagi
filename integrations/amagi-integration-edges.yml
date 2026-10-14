@@ -2,6 +2,7 @@ generated: '2026-10-13'
 method: searched
 checked:
 - https://aws.amazon.com/marketplace/
+- https://vendor-list.consensu.org/v3/vendor-list.json
 marketplace_apps: []
 edges:
 - partner_name: AWS Marketplace
@@ -35,3 +36,43 @@ edges:
   seller_name: Amagi Media Labs PTE Ltd
   detected_by: sweep-cloud-marketplaces.py
   detected: '2026-10-13'
+- partner_name: IAB Europe TCF Global Vendor List
+  partner: null
+  partner_match: domain
+  type: contract
+  channel: standard-directory
+  relationship: standard-participant
+  direction: partner-built
+  evidence: https://vendor-list.consensu.org/v3/vendor-list.json
+  contract_reference:
+    register: IAB Europe TCF Global Vendor List
+    spec_file: null
+    role: tcf-vendor
+    registered_name: Amagi Corporation
+    register_id: '1254'
+    products:
+    - Amagi Corporation
+    matched_domain: amagi.com
+    api_families:
+    - feature-1
+    - feature-2
+    - feature-3
+    - purpose-10
+    - purpose-11
+    - purpose-2
+    - purpose-3
+    - purpose-4
+    - purpose-5
+    - purpose-6
+    - purpose-7
+    - purpose-8
+    - purpose-9
+    - special-feature-1
+    - special-purpose-1
+    - special-purpose-2
+    - special-purpose-3
+    api_families_basis: TCF purposes, special purposes, features and special features declared on the registration
+    detected_by: sweep-adtech.py
+    detected: '2026-10-14'
+  detected_by: sweep-adtech.py
+  detected: '2026-10-14'
