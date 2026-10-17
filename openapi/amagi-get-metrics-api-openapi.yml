@@ -80,23 +80,6 @@ paths:
       operationId: getGetMetrics
       x-operation-id-source: derived
 components:
-  responses:
-    UnauthorizedError:
-      description: Token key is missing or invalid
-      headers:
-        WWW_Authenticate:
-          schema:
-            type: string
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/errorMessage'
-    badRequestError:
-      description: Bad request
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/errorMessage'
   schemas:
     errorMessage:
       type: object
@@ -126,6 +109,23 @@ components:
       enum:
       - aws
       - azure
+  responses:
+    UnauthorizedError:
+      description: Token key is missing or invalid
+      headers:
+        WWW_Authenticate:
+          schema:
+            type: string
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/errorMessage'
+    badRequestError:
+      description: Bad request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/errorMessage'
   securitySchemes:
     TokenAuth:
       type: apiKey

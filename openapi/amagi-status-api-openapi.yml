@@ -49,36 +49,7 @@ paths:
       operationId: getStatusById
       x-operation-id-source: derived
 components:
-  responses:
-    notFoundError:
-      description: Resource not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/errorMessage'
-    UnauthorizedError:
-      description: Token key is missing or invalid
-      headers:
-        WWW_Authenticate:
-          schema:
-            type: string
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/errorMessage'
   schemas:
-    JobStatus:
-      description: Job status
-      title: status represents the Job status
-      type: string
-      enum:
-      - REJECTED
-      - QUEUED
-      - RUNNING
-      - FAILED
-      - SUCCEEDED
-      - CANCELLING
-      - CANCELLED
     errorMessage:
       type: object
       required:
@@ -100,6 +71,35 @@ components:
             code:
               type: string
               description: Pre defined Error code
+    JobStatus:
+      description: Job status
+      title: status represents the Job status
+      type: string
+      enum:
+      - REJECTED
+      - QUEUED
+      - RUNNING
+      - FAILED
+      - SUCCEEDED
+      - CANCELLING
+      - CANCELLED
+  responses:
+    UnauthorizedError:
+      description: Token key is missing or invalid
+      headers:
+        WWW_Authenticate:
+          schema:
+            type: string
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/errorMessage'
+    notFoundError:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/errorMessage'
   parameters:
     jobID:
       name: id

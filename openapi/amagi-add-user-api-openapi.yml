@@ -78,35 +78,6 @@ paths:
       tags:
       - Add User
 components:
-  responses:
-    conflictResourceError:
-      description: Image Already exists
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/errorMessage'
-    UnauthorizedError:
-      description: Token key is missing or invalid
-      headers:
-        WWW_Authenticate:
-          schema:
-            type: string
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/errorMessage'
-    forbiddenError:
-      description: Forbidden to access the resource
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/errorMessage'
-    badRequestError:
-      description: Bad request
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/errorMessage'
   schemas:
     errorMessage:
       type: object
@@ -129,6 +100,35 @@ components:
             code:
               type: string
               description: Pre defined Error code
+  responses:
+    UnauthorizedError:
+      description: Token key is missing or invalid
+      headers:
+        WWW_Authenticate:
+          schema:
+            type: string
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/errorMessage'
+    conflictResourceError:
+      description: Image Already exists
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/errorMessage'
+    badRequestError:
+      description: Bad request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/errorMessage'
+    forbiddenError:
+      description: Forbidden to access the resource
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/errorMessage'
   securitySchemes:
     TokenAuth:
       type: apiKey

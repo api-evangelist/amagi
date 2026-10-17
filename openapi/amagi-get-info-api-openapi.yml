@@ -63,38 +63,6 @@ paths:
       operationId: getGetInfoByRegionByInstanceId
       x-operation-id-source: derived
 components:
-  responses:
-    UnauthorizedError:
-      description: Token key is missing or invalid
-      headers:
-        WWW_Authenticate:
-          schema:
-            type: string
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/errorMessage'
-    badRequestError:
-      description: Bad request
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/errorMessage'
-  parameters:
-    instance_id:
-      name: id
-      in: query
-      description: Instance ID
-      required: true
-      schema:
-        type: string
-    region:
-      name: id
-      in: query
-      description: Region
-      required: true
-      schema:
-        type: string
   schemas:
     errorMessage:
       type: object
@@ -117,6 +85,38 @@ components:
             code:
               type: string
               description: Pre defined Error code
+  responses:
+    UnauthorizedError:
+      description: Token key is missing or invalid
+      headers:
+        WWW_Authenticate:
+          schema:
+            type: string
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/errorMessage'
+    badRequestError:
+      description: Bad request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/errorMessage'
+  parameters:
+    region:
+      name: id
+      in: query
+      description: Region
+      required: true
+      schema:
+        type: string
+    instance_id:
+      name: id
+      in: query
+      description: Instance ID
+      required: true
+      schema:
+        type: string
   securitySchemes:
     TokenAuth:
       type: apiKey

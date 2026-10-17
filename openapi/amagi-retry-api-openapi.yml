@@ -47,16 +47,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    newJob:
-      description: Provides job id for a new job request submitted
-      title: newJob represents the response of new job id submitted
-      type: object
-      required:
-      - job_id
-      properties:
-        job_id:
-          type: string
-          description: Job ID
     errorMessage:
       type: object
       required:
@@ -78,19 +68,29 @@ components:
             code:
               type: string
               description: Pre defined Error code
+    newJob:
+      description: Provides job id for a new job request submitted
+      title: newJob represents the response of new job id submitted
+      type: object
+      required:
+      - job_id
+      properties:
+        job_id:
+          type: string
+          description: Job ID
   responses:
-    notFoundError:
-      description: Resource not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/errorMessage'
     UnauthorizedError:
       description: Token key is missing or invalid
       headers:
         WWW_Authenticate:
           schema:
             type: string
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/errorMessage'
+    notFoundError:
+      description: Resource not found
       content:
         application/json:
           schema:

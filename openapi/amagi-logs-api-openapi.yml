@@ -46,37 +46,6 @@ paths:
       operationId: getLogsById
       x-operation-id-source: derived
 components:
-  responses:
-    notFoundError:
-      description: Resource not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/errorMessage'
-    UnauthorizedError:
-      description: Token key is missing or invalid
-      headers:
-        WWW_Authenticate:
-          schema:
-            type: string
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/errorMessage'
-    badRequestError:
-      description: Bad request
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/errorMessage'
-  parameters:
-    jobID:
-      name: id
-      in: path
-      description: Job ID
-      required: true
-      schema:
-        type: string
   schemas:
     errorMessage:
       type: object
@@ -99,6 +68,37 @@ components:
             code:
               type: string
               description: Pre defined Error code
+  responses:
+    UnauthorizedError:
+      description: Token key is missing or invalid
+      headers:
+        WWW_Authenticate:
+          schema:
+            type: string
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/errorMessage'
+    notFoundError:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/errorMessage'
+    badRequestError:
+      description: Bad request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/errorMessage'
+  parameters:
+    jobID:
+      name: id
+      in: path
+      description: Job ID
+      required: true
+      schema:
+        type: string
   securitySchemes:
     TokenAuth:
       type: apiKey

@@ -101,62 +101,6 @@ paths:
       - Submit
 components:
   schemas:
-    newJob:
-      description: Provides job id for a new job request submitted
-      title: newJob represents the response of new job id submitted
-      type: object
-      required:
-      - job_id
-      properties:
-        job_id:
-          type: string
-          description: Job ID
-    tags:
-      type: object
-      additionalProperties: true
-      description: Customer submitter tags
-      title: tags represents the custom tags used to tag the job
-    user_data:
-      title: user data which needs to be passed for EC2 job submission
-      type: string
-      description: User Data
-    queue:
-      title: Batch queue which needs to be used for Batch job submission
-      type: string
-      description: Job Queue
-    timeout:
-      title: timeout for a job's execution
-      type: integer
-      description: Job timeout
-    env:
-      type: object
-      additionalProperties:
-        type: string
-      description: Key pair values of environment variables
-      title: env represents the environment variables passed to the container
-    ami:
-      title: AMI which needs to be used for EC2 job submission
-      type: string
-      description: AMI
-    resources:
-      description: Compute resources
-      title: resources represents the compute resources required to run the job
-      type: object
-      properties:
-        vcpus:
-          type: integer
-          description: vcpus required to run the job
-        memory:
-          type: number
-          format: float
-          description: Memory in GB required to run the job
-    cloudProvider:
-      description: Cloud provider
-      title: cloud_provider represents the list of all cloud providers supported
-      type: string
-      enum:
-      - aws
-      - azure
     errorMessage:
       type: object
       required:
@@ -186,13 +130,17 @@ components:
       description: Customer
       title: customer for which the job is run
       type: string
-    Priority:
-      description: Job priority
-      title: priority represents the Job priority
-      type: string
-      enum:
-      - HIGH
-      - LOW
+    tags:
+      type: object
+      additionalProperties: true
+      description: Customer submitter tags
+      title: tags represents the custom tags used to tag the job
+    env:
+      type: object
+      additionalProperties:
+        type: string
+      description: Key pair values of environment variables
+      title: env represents the environment variables passed to the container
     command:
       description: Docker arguments
       title: command represents the docker arguments passed to the container
@@ -203,6 +151,58 @@ components:
       title: dockerImage represents the docker image url
       type: string
       description: Docker image url
+    Priority:
+      description: Job priority
+      title: priority represents the Job priority
+      type: string
+      enum:
+      - HIGH
+      - LOW
+    cloudProvider:
+      description: Cloud provider
+      title: cloud_provider represents the list of all cloud providers supported
+      type: string
+      enum:
+      - aws
+      - azure
+    resources:
+      description: Compute resources
+      title: resources represents the compute resources required to run the job
+      type: object
+      properties:
+        vcpus:
+          type: integer
+          description: vcpus required to run the job
+        memory:
+          type: number
+          format: float
+          description: Memory in GB required to run the job
+    timeout:
+      title: timeout for a job's execution
+      type: integer
+      description: Job timeout
+    queue:
+      title: Batch queue which needs to be used for Batch job submission
+      type: string
+      description: Job Queue
+    user_data:
+      title: user data which needs to be passed for EC2 job submission
+      type: string
+      description: User Data
+    ami:
+      title: AMI which needs to be used for EC2 job submission
+      type: string
+      description: AMI
+    newJob:
+      description: Provides job id for a new job request submitted
+      title: newJob represents the response of new job id submitted
+      type: object
+      required:
+      - job_id
+      properties:
+        job_id:
+          type: string
+          description: Job ID
   responses:
     UnauthorizedError:
       description: Token key is missing or invalid
