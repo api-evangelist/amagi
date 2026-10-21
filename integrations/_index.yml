@@ -55,3 +55,57 @@
     detected: '2026-10-14'
   status: not-a-workflow
   arazzo: null
+- slug: amagi-go-module-proxy
+  label: Go module proxy
+  partner_name: Go module proxy
+  category: official SDK (Go)
+  type: register
+  channel: package-registry
+  evidence: https://pkg.go.dev/oss.amagi.com/slv
+  source: edge
+  relationship: distribution-channel
+  contract_reference:
+    register: Go module proxy (public registry JSON)
+    spec_file: null
+    language: Go
+    packages:
+    - name: oss.amagi.com/slv
+      version: v0.8.0
+      released: '2025-03-06'
+      released_field: Time
+      lapsed: false
+      page: https://pkg.go.dev/oss.amagi.com/slv
+      repo_leg: domain:amagi.com
+      publisher_leg: module-path:amagi.com
+      matched_by: domain
+    current: true
+    signal_note: 'an official package on the registry: distribution, not an integration; lapsed = no release in
+      24 months'
+    detected_by: sweep-official-sdks.py
+    detected: '2026-10-18'
+  status: not-a-workflow
+  arazzo: null
+- slug: amagi-dpp-digital-production-partnership
+  label: DPP (Digital Production Partnership)
+  partner_name: DPP (Digital Production Partnership)
+  category: media supply-chain industry body
+  type: register
+  channel: standard-directory
+  evidence: https://www.thedpp.com/members-directory
+  source: edge
+  relationship: standard-participant
+  contract_reference:
+    register: DPP members directory (thedpp.com/members-directory)
+    standard: DPP
+    spec_file: null
+    role: dpp-member
+    registered_name: Amagi
+    register_id: https://www.thedpp.com/members-directory
+    matched_domain: amagi.com
+    matched_by: domain
+    signal_note: 'participation only: a listing on the register, never counted'
+    detected_by: sweep-film-media-identifiers-eidr.py
+    detected: '2026-10-21'
+    dpp_category: technology
+  status: not-a-workflow
+  arazzo: null
