@@ -137,3 +137,49 @@
     detected: '2026-10-21'
   status: not-a-workflow
   arazzo: null
+- slug: amagi-tag-registry-trustworthy-accountability-group
+  label: TAG Registry (Trustworthy Accountability Group)
+  partner_name: TAG Registry (Trustworthy Accountability Group)
+  category: Ad fraud / brand safety certification (TAG)
+  type: register
+  channel: standard-directory
+  evidence: https://www.tagtoday.net/registry
+  source: edge
+  relationship: standard-participant
+  contract_reference:
+    register: TAG Registry (tagtoday.net/registry; registry-search public endpoint)
+    spec_file: null
+    standard: TAG certification programs (Trustworthy Accountability Group)
+    role: tag-certified
+    registrations:
+    - registered_name: AMAGI CORPORATION
+      register_id: https://hubgloo.opxar.com/company/14881385628
+      verified_by_tag: true
+      seals:
+      - Brand Safety Certified
+      matched_domain: null
+      matched_by: register-name
+      register_name_note: register-name 'amagi' = amagi; no wikidata P856
+    signal_note: certified_products = one entry per TAG seal held (CAF, BSC, CAM, CAP, CFT), never per registration;
+      validation route (third-party auditor / TAG Validation / self-attestation) and category are context. The registry
+      shows current seals only and marks none expired, so lapsed is false. Verified by TAG with no seal = listing
+      only (participation)
+    detected_by: sweep-tag-certified-ad-fraud.py
+    detected: '2026-10-23'
+    certified_products:
+    - product: Brand Safety Certified
+      product_type: Brand Safety Certified
+      standard: TAG Brand Safety Certified (BSC)
+      lapsed: false
+      validation:
+      - third-party auditor
+      categories:
+      - Intermediary
+      scope:
+      - the company’s global operations
+    matched_by: register-name
+    identity_source: register-name
+    identity_note: register gave only the name; exact normalised match to the repo's apis.yml name, one repo, Wikidata
+      P856 not contradicting (Kin 2026-10-20 decision 2)
+  status: not-a-workflow
+  arazzo: null
